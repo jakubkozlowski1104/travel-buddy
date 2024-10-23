@@ -2,6 +2,9 @@ package com.travelBuddy.service;
 
 import com.travelBuddy.model.User;
 import com.travelBuddy.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
+@Transactional(rollbackOn = Exception.class)
+@RequiredArgsConstructor
 public class UserService {
 
     @Autowired
@@ -20,7 +26,7 @@ public class UserService {
     }
 
     public Optional<User> getUserById(UUID id) {
-        return userRepository.findById(id);
+        return Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found")));
     }
 
     public Optional<User> getUserByEmail(String email) {
