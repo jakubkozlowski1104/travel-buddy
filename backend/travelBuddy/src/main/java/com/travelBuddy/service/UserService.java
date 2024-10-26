@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -37,9 +36,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
-    public Optional<User> getUserById(UUID id) {
-        return Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found")));
+    public Optional<User> getUserById(String id) {
+        return userRepository.findById(id);
     }
 
     public Optional<User> getUserByEmail(String email) {
@@ -51,17 +49,19 @@ public class UserService {
     }
 
     public String uploadPhoto(String id, MultipartFile file) {
-        log.info("Saving picture for user ID: ", id);
-        UUID userId = UUID.fromString(id);
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        log.info("Saving picture for user ID: {}", id);
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         String photoUrl = photoFunction.apply(id, file);
         user.setPhotoUrl(photoUrl);
         userRepository.save(user);
         return photoUrl;
     }
 
-    private final Function<String, String> fileExtension = filename -> Optional.of(filename).filter(name -> name.contains("."))
-            .map(name -> "." + name.substring(filename.lastIndexOf(".") + 1)).orElse(".png");
+
+    private final Function<String, String> fileExtension = filename -> Optional.of(filename)
+            .filter(name -> name.contains("."))
+            .map(name -> "." + name.substring(filename.lastIndexOf(".") + 1))
+            .orElse(".png");
 
     private final BiFunction<String, MultipartFile, String> photoFunction = (id, image) -> {
         String filename = id + fileExtension.apply(image.getOriginalFilename());

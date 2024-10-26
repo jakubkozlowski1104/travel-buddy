@@ -12,12 +12,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static com.travelBuddy.constant.Constant.PHOTO_DIRECTORY;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/contacts")
 public class UserController {
 
     private final UserService userService;
@@ -40,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<User> getUserById(@PathVariable String id) {
         Optional<User> user = userService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -52,12 +51,16 @@ public class UserController {
     }
 
     @PutMapping("/photo")
-    public ResponseEntity<String> uploadPhoto(@RequestParam("id") String id, @RequestParam("file") MultipartFile file) {
-            return ResponseEntity.ok(userService.uploadPhoto(id, file));
+    public ResponseEntity<String> uploadPhoto(@RequestParam("id") String id, @RequestParam("file")MultipartFile file) {
+        return ResponseEntity.ok().body(userService.uploadPhoto(id, file));
     }
+
 
     @GetMapping("/image/{filename}")
     public byte[] getPhoto(@PathVariable("filename") String filename) throws IOException {
         return Files.readAllBytes(Paths.get(PHOTO_DIRECTORY + filename));
     }
+
+
+
 }
