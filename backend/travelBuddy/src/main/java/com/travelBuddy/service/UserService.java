@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,8 +33,10 @@ public class UserService {
     private UserRepository userRepository;
 
     public User createUser(User user) {
+        user.setCreatedAt(LocalDateTime.now()); // Ustawienie bieżącego czasu
         return userRepository.save(user);
     }
+
 
     public Optional<User> getUserById(UUID id) {
         return Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found")));

@@ -28,8 +28,14 @@ public class User {
     private UUID id;
     private String username;
     private String email;
+
+    @Column(nullable = true)
     private String bio;
+
+    @Column(nullable = true)
     private String photoUrl;
+
+    @Column(nullable = true)
     private String interests;
 
     @CreationTimestamp
