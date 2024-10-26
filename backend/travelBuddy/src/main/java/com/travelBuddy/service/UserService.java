@@ -47,7 +47,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public String uploadPhoto(String id, MultipartFile file) throws Exception {
+    public String uploadPhoto(String id, MultipartFile file) {
         log.info("Saving picture for user ID: ", id);
         UUID userId = UUID.fromString(id);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
