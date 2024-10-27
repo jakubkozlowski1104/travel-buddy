@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,10 +15,11 @@ import java.time.LocalDateTime;
 @Table(name = "notifications")
 public class Notification {
     @Id
-    @UuidGenerator
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false, updatable = false)
-    private String id;
+    private Long id;
 
+    // Przechowuje userId jako string
     @Column(name = "user_id", nullable = false)
     private String userId;
 
@@ -32,6 +31,7 @@ public class Notification {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    // Konstruktor, aby utworzyć powiadomienie z userId
     public Notification(String userId, String message) {
         this.userId = userId;
         this.message = message;
