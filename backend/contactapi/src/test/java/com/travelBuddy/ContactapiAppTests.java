@@ -1,10 +1,10 @@
-package com.project.go;
+package com.travelBuddy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ContactapiApplicationTests {
+class ContactapiAppTests {
 
 	@Test
 	void contextLoads() {

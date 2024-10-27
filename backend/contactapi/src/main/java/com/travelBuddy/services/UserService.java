@@ -1,7 +1,7 @@
-package com.project.go.service;
+package com.travelBuddy.services;
 
-import com.project.go.domain.Contact;
-import com.project.go.repo.ContactRepo;
+import com.travelBuddy.models.User;
+import com.travelBuddy.repositories.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.project.go.constant.Constant.PHOTO_DIRECTORY;
+import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
@@ -34,31 +34,31 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Slf4j
 @Transactional(rollbackOn = Exception.class)
 @RequiredArgsConstructor
-public class ContactService {
-    private final ContactRepo contactRepo;
+public class UserService {
+    private final UserRepo userRepo;
 
-    public Page<Contact> getAllContacts(int page, int size) {
-        return contactRepo.findAll(PageRequest.of(page, size, Sort.by("name")));
+    public Page<User> getAllContacts(int page, int size) {
+        return userRepo.findAll(PageRequest.of(page, size, Sort.by("name")));
     }
 
-    public Contact getContact(String id) {
-        return contactRepo.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
+    public User getContact(String id) {
+        return userRepo.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
     }
 
-    public Contact createContact(Contact contact) {
-        return contactRepo.save(contact);
+    public User createContact(User user) {
+        return userRepo.save(user);
     }
 
-    public void deleteContact(Contact contact) {
+    public void deleteContact(User user) {
         // Assignment
     }
 
     public String uploadPhoto(String id, MultipartFile file) {
         log.info("Saving picture for user ID: {}", id);
-        Contact contact = getContact(id);
+        User user = getContact(id);
         String photoUrl = photoFunction.apply(id, file);
-        contact.setPhotoUrl(photoUrl);
-        contactRepo.save(contact);
+        user.setPhotoUrl(photoUrl);
+        userRepo.save(user);
         return photoUrl;
     }
 

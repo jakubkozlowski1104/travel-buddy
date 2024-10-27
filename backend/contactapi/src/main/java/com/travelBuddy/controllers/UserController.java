@@ -1,7 +1,7 @@
-package com.project.go.resource;
+package com.travelBuddy.controllers;
 
-import com.project.go.domain.Contact;
-import com.project.go.service.ContactService;
+import com.travelBuddy.models.User;
+import com.travelBuddy.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -20,44 +20,35 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static com.project.go.constant.Constant.PHOTO_DIRECTORY;
+import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
-
-/**
- * @author Junior RT
- * @version 1.0
- * @license Get Arrays, LLC (<a href="https://www.getarrays.io">Get Arrays, LLC</a>)
- * @email getarrayz@gmail.com
- * @since 11/22/2023
- */
 
 @RestController
 @RequestMapping("/contacts")
 @RequiredArgsConstructor
-public class ContactResource {
-    private final ContactService contactService;
+public class UserController {
+    private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
-        //return ResponseEntity.ok().body(contactService.createContact(contact));
-        return ResponseEntity.created(URI.create("/contacts/userID")).body(contactService.createContact(contact));
+    public ResponseEntity<User> createContact(@RequestBody User user) {
+        return ResponseEntity.created(URI.create("/contacts/userID")).body(userService.createContact(user));
     }
 
     @GetMapping
-    public ResponseEntity<Page<Contact>> getContacts(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                     @RequestParam(value = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok().body(contactService.getAllContacts(page, size));
+    public ResponseEntity<Page<User>> getContacts(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                  @RequestParam(value = "size", defaultValue = "10") int size) {
+        return ResponseEntity.ok().body(userService.getAllContacts(page, size));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getContact(@PathVariable(value = "id") String id) {
-        return ResponseEntity.ok().body(contactService.getContact(id));
+    public ResponseEntity<User> getContact(@PathVariable(value = "id") String id) {
+        return ResponseEntity.ok().body(userService.getContact(id));
     }
 
     @PutMapping("/photo")
     public ResponseEntity<String> uploadPhoto(@RequestParam("id") String id, @RequestParam("file")MultipartFile file) {
-        return ResponseEntity.ok().body(contactService.uploadPhoto(id, file));
+        return ResponseEntity.ok().body(userService.uploadPhoto(id, file));
     }
 
 

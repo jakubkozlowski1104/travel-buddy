@@ -1,6 +1,5 @@
-package com.project.go.domain;
+package com.travelBuddy.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,16 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
-
-/**
- * @author Junior RT
- * @version 1.0
- * @license Get Arrays, LLC (<a href="https://www.getarrays.io">Get Arrays, LLC</a>)
- * @email getarrayz@gmail.com
- * @since 11/22/2023
- */
-
 @Entity
 @Getter
 @Setter
@@ -28,7 +17,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 @AllArgsConstructor
 //@JsonInclude(NON_DEFAULT)
 @Table(name = "contacts")
-public class Contact {
+public class User {
     @Id
     @UuidGenerator
     @Column(name = "id", unique = true, updatable = false)
