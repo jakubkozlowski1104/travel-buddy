@@ -39,4 +39,12 @@ public class NotificationService {
     public void deleteNotification(String id) {
         notificationRepo.deleteById(id);
     }
+
+    public void deleteAllNotificationsForUser(String userId) {
+        notificationRepo.deleteByUserId(userId);
+    }
+
+    public long countUnreadNotificationsForUser(String userId) {
+        return notificationRepo.countByUserIdAndIsReadFalse(userId);
+    }
 }

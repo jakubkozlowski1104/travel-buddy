@@ -24,25 +24,43 @@ public class NotificationController {
         return ResponseEntity.ok(notificationService.createNotification(request.getUserId(), request.getMessage()));
     }
 
+    //works
     @GetMapping("/{userId}")
     public ResponseEntity<List<Notification>> getNotificationsForUser(@PathVariable String userId) {
         return ResponseEntity.ok(notificationService.getNotificationsForUser(userId));
     }
 
+    //works
     @GetMapping("/notification/{id}")
     public ResponseEntity<Notification> getNotificationById(@PathVariable String id) {
         return ResponseEntity.ok(notificationService.getNotificationById(id));
     }
 
+    //works
     @PutMapping("/markAsRead/{id}")
     public ResponseEntity<String> markAsRead(@PathVariable String id) {
         notificationService.markAsRead(id);
         return ResponseEntity.ok("Notification marked as read");
     }
 
+    //work
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteNotification(@PathVariable String id) {
         notificationService.deleteNotification(id);
         return ResponseEntity.ok("Notification deleted successfully");
+    }
+
+    //works
+    @DeleteMapping("/allforUser/{userId}")
+    public ResponseEntity<String> deleteAllNotificationsForUser(@PathVariable String userId) {
+        notificationService.deleteAllNotificationsForUser(userId);
+        return ResponseEntity.ok("All notifications deleted for user: " + userId);
+    }
+
+    //works
+    @GetMapping("/countUnreadForUser/{userId}")
+    public ResponseEntity<Long> countUnreadNotificationsForUser(@PathVariable String userId) {
+        long count = notificationService.countUnreadNotificationsForUser(userId);
+        return ResponseEntity.ok(count);
     }
 }
