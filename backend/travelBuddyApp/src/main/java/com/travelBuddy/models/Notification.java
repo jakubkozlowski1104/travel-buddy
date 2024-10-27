@@ -1,5 +1,6 @@
 package com.travelBuddy.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,9 +20,10 @@ public class Notification {
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     private Long id;
 
-    // Przechowuje userId jako string
-    @Column(name = "user_id", nullable = false)
-    private String userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
+    private User user;
 
     private String message;
 
@@ -32,8 +34,8 @@ public class Notification {
     private LocalDateTime createdAt;
 
     // Konstruktor, aby utworzyć powiadomienie z userId
-    public Notification(String userId, String message) {
-        this.userId = userId;
+    public Notification(User user, String message) {
+        this.user = user;
         this.message = message;
         this.isRead = false;
         this.createdAt = LocalDateTime.now();

@@ -1,5 +1,6 @@
 package com.travelBuddy.controllers;
 
+import com.travelBuddy.DTO.NotificationRequest;
 import com.travelBuddy.models.Notification;
 import com.travelBuddy.repositories.UserRepo;
 import com.travelBuddy.services.NotificationService;
@@ -13,14 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/notifications")
 @RequiredArgsConstructor
+
 public class NotificationController {
     private final NotificationService notificationService;
-    private final UserRepo userRepo;
-    private final UserService userService;
 
+    //works
     @PostMapping
-    public ResponseEntity<Notification> createNotification(@RequestParam String userId, @RequestBody String message) {
-        return ResponseEntity.ok(notificationService.createNotification(userId, message));
+    public ResponseEntity<Notification> createNotification(@RequestBody NotificationRequest request) {
+        return ResponseEntity.ok(notificationService.createNotification(request.getUserId(), request.getMessage()));
     }
 
     @GetMapping("/{userId}")

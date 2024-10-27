@@ -14,9 +14,11 @@ import java.util.List;
 @Transactional
 public class NotificationService {
     private final NotificationRepo notificationRepo;
+    private final UserService userService;
 
     public Notification createNotification(String userId, String message) {
-        Notification notification = new Notification(userId, message);
+        User user = userService.getUserById(userId);
+        Notification notification = new Notification(user, message);
         return notificationRepo.save(notification);
     }
 
