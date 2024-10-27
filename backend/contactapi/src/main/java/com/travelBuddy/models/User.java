@@ -1,14 +1,14 @@
 package com.travelBuddy.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UuidGenerator;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -20,13 +20,26 @@ import org.hibernate.annotations.UuidGenerator;
 public class User {
     @Id
     @UuidGenerator
-    @Column(name = "id", unique = true, updatable = false)
+    @Column(name = "id", unique = true, nullable = false, updatable = false)
     private String id;
-    private String name;
+
+    @Column(unique = true)
+    private String username;
+
+    @Column(unique = true)
     private String email;
-    private String title;
-    private String phone;
-    private String address;
-    private String status;
+
+    private String bio;
     private String photoUrl;
+    private String interests;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
 }

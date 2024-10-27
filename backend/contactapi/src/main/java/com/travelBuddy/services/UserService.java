@@ -22,14 +22,6 @@ import java.util.function.Function;
 import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
-/**
- * @author Junior RT
- * @version 1.0
- * @license Get Arrays, LLC (<a href="https://www.getarrays.io">Get Arrays, LLC</a>)
- * @email getarrayz@gmail.com
- * @since 11/22/2023
- */
-
 @Service
 @Slf4j
 @Transactional(rollbackOn = Exception.class)
@@ -37,15 +29,15 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class UserService {
     private final UserRepo userRepo;
 
-    public Page<User> getAllContacts(int page, int size) {
-        return userRepo.findAll(PageRequest.of(page, size, Sort.by("name")));
+    public Page<User> getAllUsers(int page, int size) {
+        return userRepo.findAll(PageRequest.of(page, size, Sort.by("username")));
     }
 
-    public User getContact(String id) {
+    public User getUserById(String id) {
         return userRepo.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
     }
 
-    public User createContact(User user) {
+    public User createUser(User user) {
         return userRepo.save(user);
     }
 
@@ -55,7 +47,7 @@ public class UserService {
 
     public String uploadPhoto(String id, MultipartFile file) {
         log.info("Saving picture for user ID: {}", id);
-        User user = getContact(id);
+        User user = getUserById(id);
         String photoUrl = photoFunction.apply(id, file);
         user.setPhotoUrl(photoUrl);
         userRepo.save(user);
@@ -73,24 +65,9 @@ public class UserService {
             Files.copy(image.getInputStream(), fileStorageLocation.resolve(filename), REPLACE_EXISTING);
             return ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/contacts/image/" + filename).toUriString();
+                    .path("/users/image/" + filename).toUriString();
         }catch (Exception exception) {
             throw new RuntimeException("Unable to save image");
         }
     };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
