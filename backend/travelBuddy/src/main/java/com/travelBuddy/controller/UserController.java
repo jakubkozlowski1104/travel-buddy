@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.travelBuddy.constant.Constant.PHOTO_DIRECTORY;
-//commit
+
 @RestController
 @RequestMapping("/contacts")
 public class UserController {
@@ -60,7 +60,6 @@ public class UserController {
     public byte[] getPhoto(@PathVariable("filename") String filename) throws IOException {
         return Files.readAllBytes(Paths.get(PHOTO_DIRECTORY + filename));
     }
-
 
 
 }
