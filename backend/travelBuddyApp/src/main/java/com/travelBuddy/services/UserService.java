@@ -41,8 +41,9 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public void deleteContact(User user) {
-        // Assignment
+    public void deleteUser(String id) {
+        User user = getUserById(id);
+        userRepo.delete(user);
     }
 
     public String uploadPhoto(String id, MultipartFile file) {
