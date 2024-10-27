@@ -20,7 +20,7 @@ public class NotificationController {
 
     @PostMapping
     public ResponseEntity<Notification> createNotification(@RequestParam String userId, @RequestBody String message) {
-        return ResponseEntity.ok(notificationService.createNotification(userService.getUserById(userId), message));
+        return ResponseEntity.ok(notificationService.createNotification(userId, message));
     }
 
     @GetMapping("/{userId}")
