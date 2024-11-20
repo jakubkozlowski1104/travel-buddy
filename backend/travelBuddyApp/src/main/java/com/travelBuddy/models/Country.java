@@ -25,8 +25,4 @@ public class Country {
 
     @Column(name = "code", nullable = false, length = 3, unique = true)
     private String code;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserCountryVisited> visitingUsers; // Nowa relacja
 }
