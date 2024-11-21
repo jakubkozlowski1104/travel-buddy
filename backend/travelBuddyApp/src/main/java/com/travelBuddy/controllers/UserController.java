@@ -1,5 +1,6 @@
 package com.travelBuddy.controllers;
 
+import com.travelBuddy.DTO.UserDTO;
 import com.travelBuddy.models.User;
 import com.travelBuddy.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
@@ -37,9 +39,9 @@ public class UserController {
 
     //works
     @GetMapping
-    public ResponseEntity<Page<User>> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
-                                               @RequestParam(value = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok().body(userService.getAllUsers(page, size));
+    public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                  @RequestParam(value = "size", defaultValue = "10") int size) {
+        return ResponseEntity.ok().body(userService.getAllUsersAsDTO(page, size));
     }
 
     @DeleteMapping("/{id}")
@@ -59,4 +61,6 @@ public class UserController {
     public byte[] getPhoto(@PathVariable("filename") String filename) throws IOException {
         return Files.readAllBytes(Paths.get(PHOTO_DIRECTORY + filename));
     }
+
+
 }

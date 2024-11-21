@@ -25,4 +25,8 @@ public class Country {
 
     @Column(name = "code", nullable = false, length = 3, unique = true)
     private String code;
+
+    @JsonManagedReference(value = "country-reference")
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserCountriesVisited> usersVisited;
 }
