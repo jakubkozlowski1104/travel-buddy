@@ -1,5 +1,6 @@
 package com.travelBuddy.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,4 +45,14 @@ public class User {
     @JsonManagedReference(value = "user-reference")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCountriesVisited> countriesVisited;
+
+    @JsonBackReference
+    @ManyToMany
+    @JoinTable(
+            name = "user_trips",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "trip_id")
+    )
+    private List<Trip> trips;
 }
+
