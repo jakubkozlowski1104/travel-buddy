@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -67,4 +68,14 @@ public class Trip {
 
     @ManyToMany(mappedBy = "trips")
     private List<User> users;
+
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripCountries> tripCountries;
+
+    
+    public List<Country> getCountries() {
+        return tripCountries.stream()
+                .map(TripCountries::getCountry)
+                .collect(Collectors.toList());
+    }
 }

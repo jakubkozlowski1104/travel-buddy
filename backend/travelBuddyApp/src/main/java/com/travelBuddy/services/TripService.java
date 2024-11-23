@@ -65,23 +65,4 @@ public class TripService {
                         (endDate == null || (trip.getEndDate() != null && !trip.getEndDate().isAfter(endDate))))
                 .toList();
     }
-
-//    public void addCountryToTrip(Long tripId, Long countryId) {
-//        Trip trip = getTripById(tripId);
-//        Country country = countryRepo.findById(countryId).orElseThrow(() -> new RuntimeException("Country not found"));
-//        trip.getCountries().add(country);
-//        tripRepo.save(trip);
-//    }
-
-//    public List<Country> getCountriesInTrip(Long tripId) {
-//        Trip trip = getTripById(tripId);
-//        return trip.getCountries();
-//    }
-
-//    public void removeCountryFromTrip(Long tripId, Long countryId) {
-//        Trip trip = getTripById(tripId);
-//        Country country = countryRepo.findById(countryId).orElseThrow(() -> new RuntimeException("Country not found"));
-//        trip.getCountries().remove(country);
-//        tripRepo.save(trip);
-//    }
 }

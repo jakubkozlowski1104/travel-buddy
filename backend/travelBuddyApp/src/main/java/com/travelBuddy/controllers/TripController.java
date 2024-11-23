@@ -62,21 +62,4 @@ public class TripController {
     ) {
         return ResponseEntity.ok(tripService.searchTrips(tripName, startDate, endDate));
     }
-
-//    @PostMapping("/{tripId}/countries/{countryId}")
-//    public ResponseEntity<String> addCountryToTrip(@PathVariable Long tripId, @PathVariable Long countryId) {
-//        tripService.addCountryToTrip(tripId, countryId);
-//        return ResponseEntity.ok("Country added to trip.");
-//    }
-//
-//    @GetMapping("/{tripId}/countries")
-//    public ResponseEntity<List<Country>> getCountriesInTrip(@PathVariable Long tripId) {
-//        return ResponseEntity.ok(tripService.getCountriesInTrip(tripId));
-//    }
-//
-//    @DeleteMapping("/{tripId}/countries/{countryId}")
-//    public ResponseEntity<String> removeCountryFromTrip(@PathVariable Long tripId, @PathVariable Long countryId) {
-//        tripService.removeCountryFromTrip(tripId, countryId);
-//        return ResponseEntity.ok("Country removed from trip.");
-//    }
 }
