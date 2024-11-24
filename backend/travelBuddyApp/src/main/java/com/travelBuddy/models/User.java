@@ -54,5 +54,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "trip_id")
     )
     private List<Trip> trips;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserFavouriteTrip> favouriteTrips;
 }
 

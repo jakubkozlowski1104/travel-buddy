@@ -72,7 +72,10 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripCountries> tripCountries;
 
-    
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserFavouriteTrip> favouriteTrips;
+
+
     public List<Country> getCountries() {
         return tripCountries.stream()
                 .map(TripCountries::getCountry)
