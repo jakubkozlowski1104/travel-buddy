@@ -46,7 +46,7 @@ public class Trip {
     @Column(name = "end_date", nullable = true)
     private LocalDate endDate;
 
-    @Column(name = "description", columnDefinition = "TEXT", nullable = true)
+    @Column(name = "description", nullable = true)
     private String description;
 
     @CreationTimestamp
@@ -63,7 +63,7 @@ public class Trip {
     @Column(name = "photos", length = 255, nullable = true)
     private String photos;
 
-    @Column(name = "looking_for", columnDefinition = "TEXT", nullable = true)
+    @Column(name = "looking_for", nullable = true)
     private String lookingFor;
 
     @ManyToMany(mappedBy = "trips")
@@ -75,6 +75,9 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserFavouriteTrip> favouriteTrips;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages;
 
     public List<Country> getCountries() {
         return tripCountries.stream()
