@@ -1,5 +1,6 @@
 package com.travelBuddy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"users", "tripCountries", "travelType", "favouriteTrips", "messages"})
 @Table(name = "trips")
 public class Trip {
     @Id
@@ -34,7 +36,7 @@ public class Trip {
     private Integer daysOfTravel;
 
     @ManyToOne
-    @JoinColumn(name = "travel_type", nullable = true)
+    @JoinColumn(name = "travel_type_id", nullable = true)
     private TravelType travelType;
 
     @Column(name = "estimated_cost", precision = 10, scale = 2, nullable = true)
@@ -72,6 +74,7 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripCountries> tripCountries;
 
+    @JsonManagedReference(value = "trip-favourites")
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserFavouriteTrip> favouriteTrips;
 
