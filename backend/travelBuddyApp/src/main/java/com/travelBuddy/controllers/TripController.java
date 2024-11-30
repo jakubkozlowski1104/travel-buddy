@@ -2,7 +2,9 @@ package com.travelBuddy.controllers;
 
 import com.travelBuddy.models.Country;
 import com.travelBuddy.models.Trip;
-import com.travelBuddy.models.User;
+import com.travelBuddy.models.TripCountries;
+import com.travelBuddy.models.TravelType;
+import com.travelBuddy.DTO.TripRequestDTO;
 import com.travelBuddy.services.TripService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,10 @@ public class TripController {
     private final TripService tripService;
 
     @PostMapping
-    public ResponseEntity<Trip> createTrip(@RequestBody Trip trip) {
-        return ResponseEntity.ok(tripService.createTrip(trip));
+    public ResponseEntity<Trip> createTrip(@RequestBody TripRequestDTO tripRequestDTO) {
+        Trip trip = mapToTrip(tripRequestDTO);
+        Trip createdTrip = tripService.createTrip(trip);
+        return ResponseEntity.ok(createdTrip);
     }
 
     @PutMapping("/{tripId}")
@@ -61,5 +65,38 @@ public class TripController {
             @RequestParam(required = false) LocalDate endDate
     ) {
         return ResponseEntity.ok(tripService.searchTrips(tripName, startDate, endDate));
+    }
+
+    // Metoda do mapowania TripRequestDTO na Trip
+    private Trip mapToTrip(TripRequestDTO tripRequestDTO) {
+        Trip trip = new Trip();
+        trip.setTripName(tripRequestDTO.getTripName());
+        trip.setDaysOfTravel(tripRequestDTO.getDaysOfTravel());
+        trip.setEstimatedCost(tripRequestDTO.getEstimatedCost());
+        trip.setStartDate(tripRequestDTO.getStartDate());
+        trip.setEndDate(tripRequestDTO.getEndDate());
+        trip.setDescription(tripRequestDTO.getDescription());
+        trip.setLookingFor(tripRequestDTO.getLookingFor());
+
+        // Mapowanie TravelType
+        if (tripRequestDTO.getTravelTypeId() != null) {
+            TravelType travelType = new TravelType();
+            travelType.setId(tripRequestDTO.getTravelTypeId());
+            trip.setTravelType(travelType);
+        }
+
+        // Mapowanie krajów
+        if (tripRequestDTO.getCountries() != null) {
+            tripRequestDTO.getCountries().forEach(countryId -> {
+                Country country = new Country();
+                country.setId(countryId);
+                TripCountries tripCountry = new TripCountries();
+                tripCountry.setCountry(country);
+                tripCountry.setTrip(trip);
+                trip.getTripCountries().add(tripCountry);
+            });
+        }
+
+        return trip;
     }
 }

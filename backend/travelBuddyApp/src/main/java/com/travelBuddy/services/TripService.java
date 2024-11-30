@@ -20,17 +20,42 @@ public class TripService {
     private final CountryRepo countryRepo;
 
     public Trip createTrip(Trip trip) {
+        // Obsługa powiązania krajów
+        if (trip.getTripCountries() != null) {
+            trip.getTripCountries().forEach(tripCountry -> {
+                Country country = countryRepo.findById(tripCountry.getCountry().getId())
+                        .orElseThrow(() -> new RuntimeException("Country not found with id: " + tripCountry.getCountry().getId()));
+                tripCountry.setTrip(trip);
+                tripCountry.setCountry(country);
+            });
+        }
         return tripRepo.save(trip);
     }
 
     public Trip updateTrip(Long tripId, Trip updatedTrip) {
         Trip existingTrip = getTripById(tripId);
+
+        // Aktualizacja pól tripa
         existingTrip.setTripName(updatedTrip.getTripName());
         existingTrip.setDaysOfTravel(updatedTrip.getDaysOfTravel());
         existingTrip.setStartDate(updatedTrip.getStartDate());
         existingTrip.setEndDate(updatedTrip.getEndDate());
         existingTrip.setEstimatedCost(updatedTrip.getEstimatedCost());
         existingTrip.setDescription(updatedTrip.getDescription());
+        existingTrip.setLookingFor(updatedTrip.getLookingFor());
+
+        // Obsługa powiązania krajów
+        if (updatedTrip.getTripCountries() != null) {
+            existingTrip.getTripCountries().clear(); // Usuń obecne kraje
+            updatedTrip.getTripCountries().forEach(tripCountry -> {
+                Country country = countryRepo.findById(tripCountry.getCountry().getId())
+                        .orElseThrow(() -> new RuntimeException("Country not found with id: " + tripCountry.getCountry().getId()));
+                tripCountry.setTrip(existingTrip);
+                tripCountry.setCountry(country);
+                existingTrip.getTripCountries().add(tripCountry);
+            });
+        }
+
         return tripRepo.save(existingTrip);
     }
 

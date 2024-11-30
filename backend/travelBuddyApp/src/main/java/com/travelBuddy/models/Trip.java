@@ -13,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"users", "tripCountries", "travelType", "favouriteTrips", "messages"})
+@JsonIgnoreProperties({"users", "tripCountries", "favouriteTrips", "messages"})
 @Table(name = "trips")
 public class Trip {
     @Id
@@ -72,19 +73,21 @@ public class Trip {
     private List<User> users;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TripCountries> tripCountries;
+    private List<TripCountries> tripCountries = new ArrayList<>();
 
-    @JsonManagedReference(value = "trip-favourites")
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserFavouriteTrip> favouriteTrips;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
     public List<Country> getCountries() {
+        if (tripCountries == null) {
+            return List.of();
+        }
         return tripCountries.stream()
                 .map(TripCountries::getCountry)
                 .collect(Collectors.toList());
     }
+
 }
