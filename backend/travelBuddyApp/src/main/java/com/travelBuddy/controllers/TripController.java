@@ -1,9 +1,6 @@
 package com.travelBuddy.controllers;
 
-import com.travelBuddy.models.Country;
-import com.travelBuddy.models.Trip;
-import com.travelBuddy.models.TripCountries;
-import com.travelBuddy.models.TravelType;
+import com.travelBuddy.models.*;
 import com.travelBuddy.DTO.TripRequestDTO;
 import com.travelBuddy.services.TripService;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +24,12 @@ public class TripController {
     }
 
     @PutMapping("/{tripId}")
-    public ResponseEntity<Trip> updateTrip(@PathVariable Long tripId, @RequestBody Trip updatedTrip) {
-        return ResponseEntity.ok(tripService.updateTrip(tripId, updatedTrip));
+    public ResponseEntity<Trip> updateTrip(@PathVariable Long tripId, @RequestBody TripRequestDTO tripRequestDTO) {
+        Trip updatedTrip = mapToTrip(tripRequestDTO); // Mapowanie z TripRequestDTO
+        Trip savedTrip = tripService.updateTrip(tripId, updatedTrip);
+        return ResponseEntity.ok(savedTrip);
     }
+
 
     @GetMapping
     public ResponseEntity<List<Trip>> getAllTrips() {
@@ -52,11 +52,24 @@ public class TripController {
         return ResponseEntity.ok("Trip deleted successfully.");
     }
 
+    @PostMapping("/{tripId}/users/{userId}")
+    public ResponseEntity<String> addUserToTrip(@PathVariable Long tripId, @PathVariable String userId) {
+        tripService.addUserToTrip(userId, tripId);
+        return ResponseEntity.ok("User added to trip.");
+    }
+
     @DeleteMapping("/{tripId}/users/{userId}")
     public ResponseEntity<String> removeUserFromTrip(@PathVariable Long tripId, @PathVariable String userId) {
         tripService.removeUserFromTrip(userId, tripId);
         return ResponseEntity.ok("User removed from trip.");
     }
+
+    @GetMapping("/{tripId}/users")
+    public ResponseEntity<List<User>> getUsersInTrip(@PathVariable Long tripId) {
+        List<User> users = tripService.getUsersInTrip(tripId);
+        return ResponseEntity.ok(users);
+    }
+
 
     @GetMapping("/search")
     public ResponseEntity<List<Trip>> searchTrips(
@@ -67,7 +80,6 @@ public class TripController {
         return ResponseEntity.ok(tripService.searchTrips(tripName, startDate, endDate));
     }
 
-    // Metoda do mapowania TripRequestDTO na Trip
     private Trip mapToTrip(TripRequestDTO tripRequestDTO) {
         Trip trip = new Trip();
         trip.setTripName(tripRequestDTO.getTripName());
@@ -78,11 +90,16 @@ public class TripController {
         trip.setDescription(tripRequestDTO.getDescription());
         trip.setLookingFor(tripRequestDTO.getLookingFor());
 
-        // Mapowanie TravelType
-        if (tripRequestDTO.getTravelTypeId() != null) {
-            TravelType travelType = new TravelType();
-            travelType.setId(tripRequestDTO.getTravelTypeId());
-            trip.setTravelType(travelType);
+        // Mapowanie TravelTypes
+        if (tripRequestDTO.getTravelTypeIds() != null) {
+            List<TravelType> travelTypes = tripRequestDTO.getTravelTypeIds().stream()
+                    .map(travelTypeId -> {
+                        TravelType travelType = new TravelType();
+                        travelType.setId(travelTypeId);
+                        return travelType;
+                    })
+                    .toList();
+            trip.setTravelTypes(travelTypes);
         }
 
         // Mapowanie krajów
@@ -99,4 +116,5 @@ public class TripController {
 
         return trip;
     }
+
 }
