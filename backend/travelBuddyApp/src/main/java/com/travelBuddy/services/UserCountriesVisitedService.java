@@ -44,6 +44,10 @@ public class UserCountriesVisitedService {
         return userCountriesVisitedRepo.save(visit);
     }
 
+    public List<UserCountriesVisited> getVisitsByCountryId(Long countryId) {
+        return userCountriesVisitedRepo.findByCountryId(countryId);
+    }
+
     public boolean deleteVisit(Long visitId) {
         if (userCountriesVisitedRepo.existsById(visitId)) {
             userCountriesVisitedRepo.deleteById(visitId);
