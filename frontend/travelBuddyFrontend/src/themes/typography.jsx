@@ -9,7 +9,7 @@ const typography = {
     fontWeight: 600,
   },
   body1: {
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     lineHeight: 1.5,
   },
   button: {

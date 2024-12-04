@@ -6,10 +6,7 @@ const components = {
         padding: '10px 20px',
       },
     },
-    defaultProps: {
-      disableRipple: true,
     },
-  },
   MuiPaper: {
     styleOverrides: {
       root: {
