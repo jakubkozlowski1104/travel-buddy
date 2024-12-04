@@ -4,9 +4,9 @@ import typography from './typography';
 import components from './components';
 
 const theme = createTheme({
-  palette, // Kolory
-  typography, // Typografia
-  components, // Style komponentów
+  palette,
+  typography, 
+  components, 
 });
 
 export default theme;
