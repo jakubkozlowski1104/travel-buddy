@@ -9,6 +9,10 @@ export const StyledContainer = styled.div`
   width: 100%;
   background-color: #eddbdb;
 
+  nav > * {
+    margin: 10px;
+  }
+
   nav {
     position: absolute;
     top: 0;
@@ -31,7 +35,6 @@ export const StyledContainer = styled.div`
       align-items: center;
       padding: 0 20px;
       flex: 5;
-      background-color: #2cb9ff;
 
       li {
         text-transform: uppercase;
@@ -41,12 +44,60 @@ export const StyledContainer = styled.div`
         font-size: 1rem;
       }
     }
-    .login {
-      flex: 1;
+    .buttons {
+      display: flex;
+      justify-content: center;
+
+      button {
+        margin: 10px;
+      }
     }
     .language {
+      display: flex;
       justify-content: center;
+      align-items: center;
       flex: 1;
+
+      div {
+        margin: 5px;
+      }
+
+      .circle {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        background-color: green;
+        border-radius: 50%;
+        border: 2px solid black;
+        cursor: pointer;
+
+        img {
+          width: 100%;
+        }
+
+        .dropdown.open {
+          max-height: 180px;
+        }
+
+        .dropdown {
+          position: absolute;
+          top: -7px;
+          left: calc(50% - 35px);
+          width: 60px;
+          max-height: 0; /* Domyślna wysokość */
+          overflow: hidden;
+          border-radius: 50px;
+          display: flex;
+          flex-direction: column;
+          transition: max-height 0.5s ease-in-out; /* Dodaj animację */
+          img {
+            padding: 3px;
+          }
+        }
+      }
+
+      .name {
+      }
     }
   }
 

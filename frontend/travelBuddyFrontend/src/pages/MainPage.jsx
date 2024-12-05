@@ -1,10 +1,40 @@
 import React from 'react';
 import { StyledContainer } from './MainPageStyles';
 import { Button } from '@mui/material';
+import { useState } from 'react';
 import backgroundImage from '../assets/backgroud-first.jpg';
 import logo from '../assets/logo.png';
+import ES from '../assets/flags/ES.png';
+import PL from '../assets/flags/PL.png';
+import GB from '../assets/flags/GB.png';
+
+const flags = [
+  { src: PL, alt: 'Poland', name: 'PL' },
+  { src: GB, alt: 'Great Britain', name: 'GB' },
+  { src: ES, alt: 'Spain', name: 'ES' },
+];
 
 const MainPage = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [flagsState, setFlagsState] = useState(flags);
+  const [actualLanguage, setActualLanguage] = useState(flags[0].src);
+  const [actualLanguageName, setActualLanguageName] = useState(flags[0].name);
+
+  const changeLanguage = (lang) => {
+    setTimeout(() => {
+      const selectedFlag = flagsState.find((flag) => flag.name === lang);
+      setActualLanguage(selectedFlag.src);
+      setActualLanguageName(selectedFlag.name);
+
+      const reorderedFlags = [
+        selectedFlag,
+        ...flagsState.filter((flag) => flag.name !== lang),
+      ];
+      setFlagsState(reorderedFlags);
+      setOpenModal(false);
+    }, 300); // Opóźnienie w milisekundach (1 sekunda)
+  };
+
   return (
     <StyledContainer>
       <section className="banner">
@@ -20,10 +50,30 @@ const MainPage = () => {
           <li>info</li>
           <li>traveling</li>
         </div>
-        <Button color="primary" variant="contained">
-          LOGIN
-        </Button>
-        <div className="language">EN</div>
+        <div className="buttons">
+          <Button color="primary" variant="contained">
+            LOGIN
+          </Button>
+          <Button color="primary" variant="contained">
+            SIGN UP
+          </Button>
+        </div>
+        <div className="language">
+          <div className="circle" onClick={() => setOpenModal(!openModal)}>
+            <img src={actualLanguage} alt="Selected language" />
+            <div className={`dropdown ${openModal ? 'open' : ''}`}>
+              {flagsState.map((flag) => (
+                <img
+                  key={flag.name}
+                  src={flag.src}
+                  alt={flag.alt}
+                  onClick={() => changeLanguage(flag.name)}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="name">{actualLanguageName}</div>
+        </div>
       </nav>
       <section className="trvel-type">What is your travel style?</section>
       <section className="recent">osatio dodane</section>
