@@ -11,7 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import com.travelBuddy.DTO.UserDTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -71,4 +74,29 @@ public class UserService {
             throw new RuntimeException("Unable to save image");
         }
     };
+
+    private UserDTO convertToUserDTO(User user) {
+        List<String> countriesVisited = user.getCountriesVisited()
+                .stream()
+                .map(visit -> visit.getCountry().getName()) // Pobranie nazwy kraju
+                .collect(Collectors.toList());
+
+        return new UserDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getBio(),
+                user.getPhotoUrl(),
+                user.getInterests(),
+                user.getCreatedAt(),
+                countriesVisited
+        );
+    }
+
+    public List<UserDTO> getAllUsersAsDTO(int page, int size) {
+        return userRepo.findAll(PageRequest.of(page, size, Sort.by("username")))
+                .stream()
+                .map(this::convertToUserDTO)
+                .collect(Collectors.toList());
+    }
 }

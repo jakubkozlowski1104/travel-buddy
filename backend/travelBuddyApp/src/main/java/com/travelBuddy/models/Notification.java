@@ -33,7 +33,6 @@ public class Notification {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    // Konstruktor, aby utworzyć powiadomienie z userId
     public Notification(User user, String message) {
         this.user = user;
         this.message = message;
