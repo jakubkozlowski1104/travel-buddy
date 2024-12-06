@@ -1,0 +1,13 @@
+{
+  "auth": {
+    "login": "INICIAR SESIÓN",
+    "signup": "REGISTRARSE"
+  },
+  "menu": {
+    "start": "INICIO",
+    "recent": "RECIENTES",
+    "meet": "CONOCER GENTE",
+    "info": "¿CÓMO FUNCIONA?",
+    "add": "AÑADIR VIAJE"
+  }
+}

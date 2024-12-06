@@ -50,6 +50,8 @@ export const StyledContainer = styled.div`
 
       button {
         margin: 10px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
       }
     }
     .language {

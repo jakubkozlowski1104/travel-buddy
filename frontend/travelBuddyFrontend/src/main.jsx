@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import App from './App';
 import theme from './themes';
+import './i18n';
 
 const rootElement = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement);
