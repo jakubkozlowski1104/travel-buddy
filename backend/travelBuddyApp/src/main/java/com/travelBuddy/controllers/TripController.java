@@ -1,8 +1,7 @@
 package com.travelBuddy.controllers;
 
-import com.travelBuddy.models.Country;
-import com.travelBuddy.models.Trip;
-import com.travelBuddy.models.User;
+import com.travelBuddy.models.*;
+import com.travelBuddy.DTO.TripRequestDTO;
 import com.travelBuddy.services.TripService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +17,19 @@ public class TripController {
     private final TripService tripService;
 
     @PostMapping
-    public ResponseEntity<Trip> createTrip(@RequestBody Trip trip) {
-        return ResponseEntity.ok(tripService.createTrip(trip));
+    public ResponseEntity<Trip> createTrip(@RequestBody TripRequestDTO tripRequestDTO) {
+        Trip trip = mapToTrip(tripRequestDTO);
+        Trip createdTrip = tripService.createTrip(trip);
+        return ResponseEntity.ok(createdTrip);
     }
 
     @PutMapping("/{tripId}")
-    public ResponseEntity<Trip> updateTrip(@PathVariable Long tripId, @RequestBody Trip updatedTrip) {
-        return ResponseEntity.ok(tripService.updateTrip(tripId, updatedTrip));
+    public ResponseEntity<Trip> updateTrip(@PathVariable Long tripId, @RequestBody TripRequestDTO tripRequestDTO) {
+        Trip updatedTrip = mapToTrip(tripRequestDTO); // Mapowanie z TripRequestDTO
+        Trip savedTrip = tripService.updateTrip(tripId, updatedTrip);
+        return ResponseEntity.ok(savedTrip);
     }
+
 
     @GetMapping
     public ResponseEntity<List<Trip>> getAllTrips() {
@@ -48,11 +52,24 @@ public class TripController {
         return ResponseEntity.ok("Trip deleted successfully.");
     }
 
+    @PostMapping("/{tripId}/users/{userId}")
+    public ResponseEntity<String> addUserToTrip(@PathVariable Long tripId, @PathVariable String userId) {
+        tripService.addUserToTrip(userId, tripId);
+        return ResponseEntity.ok("User added to trip.");
+    }
+
     @DeleteMapping("/{tripId}/users/{userId}")
     public ResponseEntity<String> removeUserFromTrip(@PathVariable Long tripId, @PathVariable String userId) {
         tripService.removeUserFromTrip(userId, tripId);
         return ResponseEntity.ok("User removed from trip.");
     }
+
+    @GetMapping("/{tripId}/users")
+    public ResponseEntity<List<User>> getUsersInTrip(@PathVariable Long tripId) {
+        List<User> users = tripService.getUsersInTrip(tripId);
+        return ResponseEntity.ok(users);
+    }
+
 
     @GetMapping("/search")
     public ResponseEntity<List<Trip>> searchTrips(
@@ -62,4 +79,42 @@ public class TripController {
     ) {
         return ResponseEntity.ok(tripService.searchTrips(tripName, startDate, endDate));
     }
+
+    private Trip mapToTrip(TripRequestDTO tripRequestDTO) {
+        Trip trip = new Trip();
+        trip.setTripName(tripRequestDTO.getTripName());
+        trip.setDaysOfTravel(tripRequestDTO.getDaysOfTravel());
+        trip.setEstimatedCost(tripRequestDTO.getEstimatedCost());
+        trip.setStartDate(tripRequestDTO.getStartDate());
+        trip.setEndDate(tripRequestDTO.getEndDate());
+        trip.setDescription(tripRequestDTO.getDescription());
+        trip.setLookingFor(tripRequestDTO.getLookingFor());
+
+        // Mapowanie TravelTypes
+        if (tripRequestDTO.getTravelTypeIds() != null) {
+            List<TravelType> travelTypes = tripRequestDTO.getTravelTypeIds().stream()
+                    .map(travelTypeId -> {
+                        TravelType travelType = new TravelType();
+                        travelType.setId(travelTypeId);
+                        return travelType;
+                    })
+                    .toList();
+            trip.setTravelTypes(travelTypes);
+        }
+
+        // Mapowanie krajów
+        if (tripRequestDTO.getCountries() != null) {
+            tripRequestDTO.getCountries().forEach(countryId -> {
+                Country country = new Country();
+                country.setId(countryId);
+                TripCountries tripCountry = new TripCountries();
+                tripCountry.setCountry(country);
+                tripCountry.setTrip(trip);
+                trip.getTripCountries().add(tripCountry);
+            });
+        }
+
+        return trip;
+    }
+
 }

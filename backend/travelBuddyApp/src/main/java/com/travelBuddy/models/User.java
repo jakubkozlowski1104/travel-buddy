@@ -1,6 +1,7 @@
 package com.travelBuddy.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
+@JsonIgnoreProperties({"notifications", "countriesVisited", "trips", "favouriteTrips", "sentMessages", "receivedMessages"})
 public class User {
     @Id
     @UuidGenerator
@@ -38,15 +40,12 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications;
 
-    @JsonManagedReference(value = "user-reference")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCountriesVisited> countriesVisited;
 
-    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "user_trips",
@@ -58,12 +57,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserFavouriteTrip> favouriteTrips;
 
-    @JsonManagedReference(value = "user-message-sender")
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> sentMessages;
 
-    @JsonManagedReference(value = "user-message-receiver")
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> receivedMessages;
 }
-

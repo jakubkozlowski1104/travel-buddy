@@ -1,6 +1,7 @@
 package com.travelBuddy.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,23 +12,22 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_favourite_trips")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"user", "trip"})
+@Table(name = "user_favourite_trips")
 public class UserFavouriteTrip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 

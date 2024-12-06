@@ -1,5 +1,6 @@
 package com.travelBuddy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"users", "tripCountries", "favouriteTrips", "messages"})
 @Table(name = "trips")
 public class Trip {
     @Id
@@ -33,9 +36,13 @@ public class Trip {
     @Column(name = "days_of_travel", nullable = true)
     private Integer daysOfTravel;
 
-    @ManyToOne
-    @JoinColumn(name = "travel_type", nullable = true)
-    private TravelType travelType;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "trip_travel_types",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "travel_type_id")
+    )
+    private List<TravelType> travelTypes = new ArrayList<>();
 
     @Column(name = "estimated_cost", precision = 10, scale = 2, nullable = true)
     private BigDecimal estimatedCost;
@@ -66,22 +73,31 @@ public class Trip {
     @Column(name = "looking_for", nullable = true)
     private String lookingFor;
 
-    @ManyToMany(mappedBy = "trips")
-    private List<User> users;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "trip_users",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TripCountries> tripCountries;
+    private List<TripCountries> tripCountries = new ArrayList<>();
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserFavouriteTrip> favouriteTrips;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
     public List<Country> getCountries() {
+        if (tripCountries == null) {
+            return List.of();
+        }
         return tripCountries.stream()
                 .map(TripCountries::getCountry)
                 .collect(Collectors.toList());
     }
+
 }

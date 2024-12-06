@@ -1,6 +1,7 @@
 package com.travelBuddy.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"user"})
 @Table(name = "notifications")
 public class Notification {
     @Id
@@ -22,7 +24,6 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
     private User user;
 
     private String message;

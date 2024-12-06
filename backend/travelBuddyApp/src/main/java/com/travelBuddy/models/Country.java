@@ -1,5 +1,6 @@
 package com.travelBuddy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"usersVisited"})
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,6 @@ public class Country {
     @Column(name = "code", nullable = false, length = 3, unique = true)
     private String code;
 
-    @JsonManagedReference(value = "country-reference")
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCountriesVisited> usersVisited;
 }

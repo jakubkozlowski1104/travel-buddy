@@ -1,5 +1,6 @@
 package com.travelBuddy.controllers;
 
+import com.travelBuddy.DTO.AddVisitRequestDTO;
 import com.travelBuddy.DTO.UserCountriesVisitedDTO;
 import com.travelBuddy.models.UserCountriesVisited;
 import com.travelBuddy.services.UserCountriesVisitedService;
@@ -27,10 +28,18 @@ public class UserCountriesVisitedController {
     }
 
     @PostMapping
-    public ResponseEntity<UserCountriesVisited> addVisit(@RequestParam String userId, @RequestParam Long countryId) {
-        UserCountriesVisited visit = userCountriesVisitedService.addVisit(userId, countryId);
+    public ResponseEntity<UserCountriesVisited> addVisit(@RequestBody AddVisitRequestDTO request) {
+        UserCountriesVisited visit = userCountriesVisitedService.addVisit(request.getUserId(), request.getCountryId());
         return ResponseEntity.ok(visit);
     }
+
+    @GetMapping("/country/{id}")
+    public ResponseEntity<List<UserCountriesVisited>> getVisitsByCountryId(@PathVariable Long id) {
+        List<UserCountriesVisited> visits = userCountriesVisitedService.getVisitsByCountryId(id);
+        return ResponseEntity.ok(visits);
+    }
+
+
 
     @DeleteMapping("/{visitId}")
     public ResponseEntity<String> deleteVisit(@PathVariable Long visitId) {
