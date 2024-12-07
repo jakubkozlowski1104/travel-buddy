@@ -1,17 +1,19 @@
 package com.travelBuddy.controllers;
 
-import com.travelBuddy.models.User;
-import com.travelBuddy.services.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+    import com.travelBuddy.DTO.UserDTO;
+    import com.travelBuddy.models.User;
+    import com.travelBuddy.services.UserService;
+    import lombok.RequiredArgsConstructor;
+    import org.springframework.data.domain.Page;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+    import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+    import java.io.IOException;
+    import java.net.URI;
+    import java.nio.file.Files;
+    import java.nio.file.Paths;
+    import java.util.List;
 
 import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;

@@ -1,0 +1,13 @@
+{
+  "auth": {
+    "login": "ZALOGUJ SIĘ",
+    "signup": "ZAREJESTRUJ SIĘ"
+  },
+  "menu": {
+    "start": "START",
+    "recent": "OSTATNIE",
+    "meet": "POZNAWAJ LUDŹI",
+    "info": "JAK TO DZIAŁA?",
+    "add": "DODAJ PODRÓŻ"
+  }
+}

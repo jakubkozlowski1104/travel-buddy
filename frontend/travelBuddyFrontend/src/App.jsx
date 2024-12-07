@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import React from 'react';
+import MainPage from './pages/MainPage';
+import Navigation from './components/Navigation/Navigation';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <>TEST - TRAVELBUDDY!</>;
+  return (
+    <>
+      <Navigation />
+      <MainPage />
+    </>
+  );
 }
 
 export default App;

@@ -8,54 +8,51 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.List;
 
-import static com.travelBuddy.constants.Constant.X_REQUESTED_WITH;
-import static org.springframework.http.HttpHeaders.ACCEPT;
-import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
-import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS;
-import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
-import static org.springframework.http.HttpHeaders.ORIGIN;
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.OPTIONS;
-import static org.springframework.http.HttpMethod.PATCH;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
-
 @Configuration
 public class CorsConfig {
 
     @Bean
-    public CorsFilter corsFilter(){
-        var urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        var corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:4200"));
-        corsConfiguration.setAllowedHeaders(List.of(ORIGIN, ACCESS_CONTROL_ALLOW_ORIGIN, CONTENT_TYPE, ACCEPT, AUTHORIZATION, X_REQUESTED_WITH, ACCESS_CONTROL_REQUEST_METHOD, ACCESS_CONTROL_REQUEST_HEADERS, ACCESS_CONTROL_ALLOW_CREDENTIALS));
-        corsConfiguration.setExposedHeaders(List.of(ORIGIN, ACCESS_CONTROL_ALLOW_ORIGIN, CONTENT_TYPE, ACCEPT, AUTHORIZATION, X_REQUESTED_WITH, ACCESS_CONTROL_REQUEST_METHOD, ACCESS_CONTROL_REQUEST_HEADERS, ACCESS_CONTROL_ALLOW_CREDENTIALS));
-        corsConfiguration.setAllowedMethods(List.of(GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name(), OPTIONS.name()));
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-        return new CorsFilter(urlBasedCorsConfigurationSource);
+    public CorsFilter corsFilter() {
+        // Tworzymy źródło konfiguracji CORS
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+
+        // Konfiguracja pozwalająca na uwierzytelnianie (credentials)
+        config.setAllowCredentials(true);
+
+        // Dozwolone originy - aktualizuj je, jeśli aplikacja ma inne adresy URL
+        config.setAllowedOrigins(List.of(
+                "http://localhost:3000", // React (domyślny port dla CRA)
+                "http://localhost:4200", // Angular
+                "http://localhost:5173"  // Vite (React lub inne frameworki)
+        ));
+
+        // Dozwolone nagłówki HTTP
+        config.setAllowedHeaders(List.of(
+                "Origin",
+                "Content-Type",
+                "Accept",
+                "Authorization",
+                "X-Requested-With",
+                "Access-Control-Request-Method",
+                "Access-Control-Request-Headers"
+        ));
+
+        // Nagłówki, które mogą być odsłonięte w odpowiedzi
+        config.setExposedHeaders(List.of(
+                "Origin",
+                "Content-Type",
+                "Accept",
+                "Authorization"
+        ));
+
+        // Dozwolone metody HTTP
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+
+        // Rejestracja konfiguracji dla wszystkich ścieżek
+        source.registerCorsConfiguration("/**", config);
+
+        // Zwracamy filtr CORS
+        return new CorsFilter(source);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

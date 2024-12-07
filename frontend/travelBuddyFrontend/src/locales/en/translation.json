@@ -1,0 +1,13 @@
+{
+  "auth": {
+    "login": "LOG IN",
+    "signup": "SIGN UP"
+  },
+  "menu": {
+    "start": "START",
+    "recent": "RECENT",
+    "meet": "MEET PEOPLE",
+    "info": "HOW IT WORKS?",
+    "add": "ADD TRIP"
+  }
+}
