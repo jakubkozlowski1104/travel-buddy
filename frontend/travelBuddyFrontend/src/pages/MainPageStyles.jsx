@@ -13,6 +13,13 @@ export const StyledContainer = styled.div`
     margin: 10px;
   }
 
+  nav.scrolled {
+    background-color: #486b6a;
+    position: sticky;
+    height: 12vh;
+    border-bottom: 2px solid #2cb9ff;
+  }
+
   nav {
     position: absolute;
     top: 0;
@@ -25,6 +32,7 @@ export const StyledContainer = styled.div`
     padding: 20px 250px;
     justify-content: space-between;
     align-items: center;
+    transition: 0.3s;
 
     .logo {
     }
@@ -39,7 +47,7 @@ export const StyledContainer = styled.div`
       li {
         text-transform: uppercase;
         font-weight: bold;
-        margin: 5px 10px;
+        margin: 5px 20px;
         list-style-type: none;
         font-size: 1rem;
       }
@@ -86,12 +94,12 @@ export const StyledContainer = styled.div`
           top: -7px;
           left: calc(50% - 35px);
           width: 60px;
-          max-height: 0; /* Domyślna wysokość */
+          max-height: 0;
           overflow: hidden;
           border-radius: 50px;
           display: flex;
           flex-direction: column;
-          transition: max-height 0.5s ease-in-out; /* Dodaj animację */
+          transition: max-height 0.5s ease-in-out;
           img {
             padding: 3px;
           }

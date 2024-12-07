@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledContainer } from './MainPageStyles';
 import { Button } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import backgroundImage from '../assets/backgroud-first.jpg';
 import logo from '../assets/logo.png';
@@ -21,6 +21,7 @@ const MainPage = () => {
   const [flagsState, setFlagsState] = useState(flags);
   const [actualLanguage, setActualLanguage] = useState(flags[0].src);
   const [actualLanguageName, setActualLanguageName] = useState(flags[0].name);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const changeLanguage = (lang) => {
     setTimeout(() => {
@@ -38,21 +39,27 @@ const MainPage = () => {
     }, 300);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <StyledContainer>
-      <section className="banner">
-        <img src={backgroundImage} alt="foto" className="background-image" />
-        <div className="overlay"></div>
-      </section>
-      <nav>
+      <nav className={isScrolled ? 'scrolled' : ''}>
         <img src={logo} alt="foto" className="logo" />
         <div className="menu">
           <li>{t('menu.start')}</li>
           <li>{t('menu.recent')}</li>
           <li>{t('menu.meet')}</li>
-          <li>{t('menu.info')}</li>
           <li>{t('menu.add')}</li>
-          <li>check</li>
         </div>
         <div className="buttons">
           <Button color="primary" variant="contained">
@@ -79,6 +86,10 @@ const MainPage = () => {
           <div className="name">{actualLanguageName.toUpperCase()}</div>
         </div>
       </nav>
+      <section className="banner">
+        <img src={backgroundImage} alt="foto" className="background-image" />
+        <div className="overlay"></div>
+      </section>
       <section className="trvel-type">What is your travel style?</section>
       <section className="recent">osatio dodane</section>
       <section className="meet-people">poznawaj ludzi!</section>
