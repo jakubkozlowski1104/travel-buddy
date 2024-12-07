@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 
-
 export const StyledContainer = styled.div`
   position: relative;
   top: 0;
@@ -35,8 +34,8 @@ export const StyledContainer = styled.div`
       left: 0;
       width: 100%;
       height: 90;
-      background-color: rgba(0, 41, 45, 0.4);
-      z-index: 2;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 10;
     }
   }
 
@@ -52,7 +51,7 @@ export const StyledContainer = styled.div`
     background-color: #23ff89;
     height: 70vh;
   }
-  .travelers {
+  .meet {
     background-color: #4fffd9;
     height: 50vh;
   }

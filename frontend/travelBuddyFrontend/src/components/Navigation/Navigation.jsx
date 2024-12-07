@@ -29,13 +29,6 @@ const MainPage = () => {
     { name: 'add', label: t('menu.add') },
   ];
 
-  const sectionRefs = {
-    start: useRef(null),
-    recent: useRef(null),
-    meet: useRef(null),
-    add: 'add',
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -50,19 +43,12 @@ const MainPage = () => {
 
   const handleClickLi = (item) => {
     setActiveItem(item);
-
-    const section = sectionRefs[item].current;
-
+    const section = document.getElementById(item);
     if (section) {
-      const sectionTop = section.offsetTop;
-      console.log(`Section ${item} found. offsetTop: ${sectionTop}`);
-
       window.scrollTo({
-        top: sectionTop,
+        top: section.offsetTop,
         behavior: 'smooth',
       });
-    } else {
-      console.warn(`No section found for item: ${item}`);
     }
   };
 
@@ -81,6 +67,7 @@ const MainPage = () => {
             </li>
           ))}
         </div>
+
         <div className="buttons">
           <Button color="primary" variant="contained">
             {t('auth.login')}
