@@ -1,5 +1,4 @@
 import { StyledContainer } from './MainPageStyles';
-import { useRef } from 'react';
 import backgroundImage from '../assets/backgroud-first.jpg';
 
 const MainPage = () => {

@@ -11,6 +11,7 @@ const LanguageChange = ({
   flags,
 }) => {
   const [flagsState, setFlagsState] = useState(flags);
+  const { t, i18n } = useTranslation();
 
   const changeLanguage = (lang) => {
     setTimeout(() => {
