@@ -13,7 +13,7 @@ const LanguageChange = ({
   const [flagsState, setFlagsState] = useState(flags);
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (lang) => {
+  const LanguageSelect = (lang) => {
     setTimeout(() => {
       const selectedFlag = flagsState.find((flag) => flag.name === lang);
       setActualLanguage(selectedFlag.src);
@@ -49,4 +49,4 @@ const LanguageChange = ({
   );
 };
 
-export default LanguageChange;
+export default LanguageSelect;
