@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-const LanguageChange = ({
+const LanguageSelect = ({
   actualLanguage,
   openModal,
   actualLanguageName,
@@ -11,9 +11,9 @@ const LanguageChange = ({
   flags,
 }) => {
   const [flagsState, setFlagsState] = useState(flags);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
-  const LanguageSelect = (lang) => {
+  const changeLanguage = (lang) => {
     setTimeout(() => {
       const selectedFlag = flagsState.find((flag) => flag.name === lang);
       setActualLanguage(selectedFlag.src);

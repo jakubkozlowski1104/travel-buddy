@@ -6,7 +6,7 @@ import logo from '../../assets/logo.png';
 import ES from '../../assets/flags/ES.png';
 import PL from '../../assets/flags/PL.png';
 import GB from '../../assets/flags/GB.png';
-import LanguageChange from './LanguageSelect/LanguageSelect';
+import LanguageSelect from './LanguageSelect/LanguageSelect';
 
 const flags = [
   { src: GB, alt: 'Great Britain', name: 'en', language: 'English' },
