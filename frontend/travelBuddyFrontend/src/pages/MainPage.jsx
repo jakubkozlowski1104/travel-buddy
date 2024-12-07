@@ -52,6 +52,7 @@ const MainPage = () => {
           <li>{t('menu.meet')}</li>
           <li>{t('menu.info')}</li>
           <li>{t('menu.add')}</li>
+          <li>check</li>
         </div>
         <div className="buttons">
           <Button color="primary" variant="contained">
