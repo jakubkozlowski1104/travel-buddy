@@ -61,4 +61,5 @@ public class UserController {
     public byte[] getPhoto(@PathVariable("filename") String filename) throws IOException {
         return Files.readAllBytes(Paths.get(PHOTO_DIRECTORY + filename));
     }
+    //wroks
 }
