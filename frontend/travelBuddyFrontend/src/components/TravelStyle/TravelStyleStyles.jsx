@@ -120,7 +120,7 @@ export const StyledTravelStyles = styled.div`
     }
 
     &::before {
-      content: 'Join travel now!';
+      content: '${(props) => props.translation}'; /* Use prop for content */
       position: absolute;
       top: 50%;
       left: 50%;

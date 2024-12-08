@@ -3,12 +3,14 @@ import { StyledTravelStyles } from './TravelStyleStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '../../Context/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 const TravelStyle = () => {
   const [travelStyles, setTravelStyles] = useState([]);
   const containerRef = useRef(null);
   const customOrder = [6, 5, 4, 1, 2, 7, 3];
   const { language } = useLanguage();
+  const { t } = useTranslation(); // Access the translation function
 
   useEffect(() => {
     const fetchTravelStyles = async () => {
@@ -43,7 +45,7 @@ const TravelStyle = () => {
   };
 
   return (
-    <StyledTravelStyles>
+    <StyledTravelStyles translation={t('travelStyle.joinNow')}>
       <div className="center">
         <div className="banner">
           <div
@@ -56,10 +58,10 @@ const TravelStyle = () => {
             onMouseEnter={() => startScrolling(1)}
             onMouseLeave={stopScrolling}
           ></div>
-          <h1>What is your travel style?</h1>
-          <h3 className="slogan">Find yourself</h3>
+          <h1>{t('travelStyle.h1')}</h1>
+          <h3 className="slogan">{t('travelStyle.slogan')}</h3>
           <h3 className="search">
-            Search travel by type
+            {t('travelStyle.search')}
             <i>
               <FontAwesomeIcon icon={faArrowRight} />
             </i>
@@ -74,7 +76,9 @@ const TravelStyle = () => {
               <img src={style.imageUrl} alt={style.name} />
               <div className="info">
                 <h2>{style.name}</h2>
-                <p>{style.tours || 20} tours</p>
+                <p>
+                  {style.tours || 20} {t('travelStyle.tours')}
+                </p>
               </div>
             </div>
           ))}
