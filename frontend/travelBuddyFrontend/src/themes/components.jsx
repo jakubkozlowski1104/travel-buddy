@@ -6,7 +6,7 @@ const components = {
         padding: '10px 20px',
       },
     },
-    },
+  },
   MuiPaper: {
     styleOverrides: {
       root: {

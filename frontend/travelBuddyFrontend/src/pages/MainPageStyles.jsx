@@ -10,7 +10,7 @@ export const StyledContainer = styled.div`
   height: 500vh;
   width: 100vw;
   max-width: 100%;
-  background-color: #eddbdb;
+  background-color: white ;
 
   .start {
     background-color: #72e7ff;

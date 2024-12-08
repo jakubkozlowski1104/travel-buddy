@@ -25,6 +25,8 @@ const TravelStyle = () => {
     <StyledTravelStyles>
       <div className="center">
         <div className="banner">
+          <div className="scroll-left">left</div>
+          <div className="scroll-right">right</div>
           <h1>What is your travel style?</h1>
           <h3 className="slogan">Find yourself</h3>
           <h3 className="search">
@@ -37,8 +39,8 @@ const TravelStyle = () => {
       </div>
       <div className="container">
         {travelStyles.map((style) => (
-          <div key={style.id}>
-            {/* <img src={style.imageUrl} alt={style.name} /> */}
+          <div className="item" key={style.id}>
+            <img src={style.imageUrl} alt={style.name} />
             <div className="info">
               <h2>{style.name}</h2>
               <p>{style.tours || 20} tours</p>{' '}
