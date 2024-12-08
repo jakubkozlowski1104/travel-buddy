@@ -70,43 +70,40 @@ export const StyledTravelStyles = styled.div`
     justify-content: center;
     width: 3000px;
     gap: 30px;
+  }
 
+  .item {
+    position: relative;
+    flex-basis: 500px;
+    height: 400px;
+    background-color: rosybrown;
 
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .item {
-      position: relative;
-      flex-basis: 500px;
-      height: 400px;
-      background-color: rosybrown;
+    .info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: white;
+      display: flex;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      padding: 12px 23px;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      h2 {
+        margin: 0;
       }
 
-      .info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        color: white;
-        display: flex;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      p {
         margin: 0;
-        padding: 12px 23px;
-
-        h2 {
-          margin: 0;
-        }
-
-        p {
-          margin: 0;
-        }
       }
     }
   }
