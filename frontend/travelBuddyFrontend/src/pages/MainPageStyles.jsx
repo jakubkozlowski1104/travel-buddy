@@ -8,7 +8,8 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: 500vh;
-  width: 100%;
+  width: 100vw;
+  max-width: 100%;
   background-color: #eddbdb;
 
   .start {
@@ -37,11 +38,6 @@ export const StyledContainer = styled.div`
       background-color: rgba(0, 0, 0, 0.8);
       z-index: 10;
     }
-  }
-
-  .trvel-type {
-    background-color: #2cb9ff;
-    height: 100vh;
   }
   .recent {
     background-color: #ff66d6;

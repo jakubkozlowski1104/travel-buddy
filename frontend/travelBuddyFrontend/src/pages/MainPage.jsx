@@ -1,5 +1,6 @@
 import { StyledContainer } from './MainPageStyles';
 import backgroundImage from '../assets/backgroud-first.jpg';
+import TravelStyle from '../components/TravelStyle/TravelStyle';
 
 const MainPage = () => {
   return (
@@ -9,7 +10,7 @@ const MainPage = () => {
         <div className="overlay"></div>
       </section>
 
-      <section className="trvel-type">What is your travel style?</section>
+      <TravelStyle />
       <section className="recent" id="recent">
         Recent content
       </section>
