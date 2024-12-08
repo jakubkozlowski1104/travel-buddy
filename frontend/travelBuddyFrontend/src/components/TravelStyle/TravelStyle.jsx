@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { StyledTravelStyles } from './TravelStyleStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useLanguage } from '../../Context/LanguageContext';
 
 const TravelStyle = () => {
   const [travelStyles, setTravelStyles] = useState([]);
   const containerRef = useRef(null);
   const customOrder = [6, 5, 4, 1, 2, 7, 3];
+  const { language } = useLanguage();
 
   useEffect(() => {
     const fetchTravelStyles = async () => {
@@ -22,13 +24,17 @@ const TravelStyle = () => {
     fetchTravelStyles();
   }, []);
 
+  useEffect(() => {
+    console.log(`Current language: ${language}`);
+  }, [language]);
+
   let scrollInterval;
 
   const startScrolling = (direction) => {
     if (containerRef.current) {
       scrollInterval = setInterval(() => {
         containerRef.current.scrollLeft += direction * 18;
-      }, 16); 
+      }, 16);
     }
   };
 
