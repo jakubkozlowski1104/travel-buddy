@@ -2,30 +2,31 @@ import styled from '@emotion/styled';
 
 export const StyledContainer = styled.div`
   position: relative;
-  top: 0;
+  top: -20vh;
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 500vh;
-  width: 100%;
-  background-color: #eddbdb;
+  width: 100vw;
+  max-width: 100%;
+  background-color: hsl(0, 0%, 100%);
+  overflow-x: hidden;
 
   .start {
     background-color: #72e7ff;
-    height: 70vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: flex-start;
 
     .background-image {
       position: absolute;
-      top: -20vh;
+      top: 0vh;
       left: 0;
       width: 100%;
-      height: 90vh;
+      height: 100vh;
       object-fit: cover;
-      z-index: 1;
     }
 
     .overlay {
@@ -37,11 +38,6 @@ export const StyledContainer = styled.div`
       background-color: rgba(0, 0, 0, 0.8);
       z-index: 10;
     }
-  }
-
-  .trvel-type {
-    background-color: #2cb9ff;
-    height: 100vh;
   }
   .recent {
     background-color: #ff66d6;

@@ -9,5 +9,12 @@
     "meet": "POZNAWAJ LUDŹI",
     "info": "JAK TO DZIAŁA?",
     "add": "DODAJ PODRÓŻ"
+  },
+  "travelStyle": {
+    "h1": "Jaki jest Twój styl podróży?",
+    "slogan": "Odkryj siebie",
+    "search": "Szukaj podróży według typu",
+    "tours": "Tripów",
+    "joinNow": "Dołącz do podróży!"
   }
 }

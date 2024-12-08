@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+import { useLanguage } from '../../../Context/LanguageContext'; // Use the Language context
 import { StyledLanguageSelect } from './LanguageSelectStyles';
 import ES from '../../../assets/flags/ES.png';
 import PL from '../../../assets/flags/PL.png';
@@ -13,42 +12,34 @@ const flags = [
 ];
 
 const LanguageSelect = () => {
-  const [flagsArray, setFlagsState] = useState(flags);
-  const { i18n } = useTranslation();
+  const { language, changeLanguage } = useLanguage(); // Access current language and change function from context
   const [openModal, setOpenModal] = useState(false);
-  const [actualLanguage, setActualLanguage] = useState(flags[0].src);
 
-  const changeLanguage = (lang) => {
-    setTimeout(() => {
-      const selectedFlag = flagsArray.find((flag) => flag.name === lang);
-      setActualLanguage(selectedFlag.src);
-      i18n.changeLanguage(lang);
-
-      const reorderedFlags = [
-        selectedFlag,
-        ...flagsArray.filter((flag) => flag.name !== lang),
-      ];
-      setFlagsState(reorderedFlags);
-      setOpenModal(false);
-    }, 300);
-  };
+  // Reorder the flags dynamically based on the current language
+  const reorderedFlags = [
+    flags.find((flag) => flag.name === language), // Current language flag
+    ...flags.filter((flag) => flag.name !== language), // Other flags
+  ];
 
   return (
     <StyledLanguageSelect>
       <div className="circle" onClick={() => setOpenModal(!openModal)}>
-        <img src={actualLanguage} alt="Selected language" />
+        <img src={reorderedFlags[0].src} alt={reorderedFlags[0].alt} />{' '}
         <div className={`dropdown ${openModal ? 'open' : ''}`}>
-          {flagsArray.map((flag) => (
+          {reorderedFlags.map((flag) => (
             <img
               key={flag.name}
               src={flag.src}
               alt={flag.alt}
-              onClick={() => changeLanguage(flag.name)}
+              onClick={() => {
+                changeLanguage(flag.name);
+                setOpenModal(false);
+              }}
             />
           ))}
         </div>
       </div>
-      <div className="name">{flagsArray[0].name.toUpperCase()}</div>
+      <div className="name">{reorderedFlags[0].name.toUpperCase()}</div>
     </StyledLanguageSelect>
   );
 };

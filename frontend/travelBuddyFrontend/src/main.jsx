@@ -5,15 +5,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import App from './App';
 import theme from './themes';
 import './i18n';
+import { LanguageProvider } from './Context/LanguageContext'; // Import the LanguageProvider
 
 const rootElement = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </LanguageProvider>
   </React.StrictMode>
 );
