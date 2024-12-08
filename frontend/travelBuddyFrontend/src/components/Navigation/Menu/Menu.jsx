@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { StyledMenu } from './MenuStyled';
 
 const Menu = ({}) => {
   const [activeItem, setActiveItem] = useState('start');
@@ -24,7 +25,7 @@ const Menu = ({}) => {
   };
 
   return (
-    <ul className="menu">
+    <StyledMenu>
       {menuItems.map((item) => (
         <li
           key={item.name}
@@ -34,7 +35,7 @@ const Menu = ({}) => {
           {item.label}
         </li>
       ))}
-    </ul>
+    </StyledMenu>
   );
 };
 
