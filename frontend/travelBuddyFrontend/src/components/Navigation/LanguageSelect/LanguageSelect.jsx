@@ -2,8 +2,17 @@ import React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyledLanguageSelect } from './LanguageSelectStyles';
+import ES from '../../../assets/flags/ES.png';
+import PL from '../../../assets/flags/PL.png';
+import GB from '../../../assets/flags/GB.png';
 
-const LanguageSelect = ({ flags }) => {
+const flags = [
+  { src: GB, alt: 'Great Britain', name: 'en', language: 'English' },
+  { src: PL, alt: 'Poland', name: 'pl', language: 'Polski' },
+  { src: ES, alt: 'Spain', name: 'es', language: 'Español' },
+];
+
+const LanguageSelect = () => {
   const [flagsArray, setFlagsState] = useState(flags);
   const { i18n } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
