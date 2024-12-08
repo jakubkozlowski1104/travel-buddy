@@ -27,8 +27,8 @@ const TravelStyle = () => {
   const startScrolling = (direction) => {
     if (containerRef.current) {
       scrollInterval = setInterval(() => {
-        containerRef.current.scrollLeft += direction * 18; // Adjust the speed by changing the multiplier
-      }, 16); // Smooth scrolling with ~60 FPS
+        containerRef.current.scrollLeft += direction * 18;
+      }, 16); 
     }
   };
 
@@ -62,7 +62,7 @@ const TravelStyle = () => {
       </div>
       <div className="container" ref={containerRef}>
         {travelStyles
-          .sort((a, b) => customOrder.indexOf(a.id) - customOrder.indexOf(b.id)) // Sort based on custom order
+          .sort((a, b) => customOrder.indexOf(a.id) - customOrder.indexOf(b.id))
           .map((style) => (
             <div className="item" key={style.id}>
               <img src={style.imageUrl} alt={style.name} />

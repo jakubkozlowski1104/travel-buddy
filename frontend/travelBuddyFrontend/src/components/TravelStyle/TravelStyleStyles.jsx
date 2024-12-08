@@ -1,4 +1,3 @@
-
 import styled from '@emotion/styled';
 import palette from '../../themes/pallete';
 
@@ -9,6 +8,7 @@ export const StyledTravelStyles = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin-bottom: 50px;
 
   .center {
     display: flex;
@@ -20,7 +20,6 @@ export const StyledTravelStyles = styled.div`
 
       .scroll-left {
         position: absolute;
-
         top: 10.3vh;
         left: 0;
         width: 50px;
@@ -36,9 +35,8 @@ export const StyledTravelStyles = styled.div`
 
       .scroll-right {
         position: absolute;
-        top: 0;
-        right: 0;
         top: 10.3vh;
+        right: 0;
         cursor: pointer;
         width: 50px;
         height: 44vh;
@@ -76,27 +74,72 @@ export const StyledTravelStyles = styled.div`
   }
 
   .container {
+    overflow-x: auto;
+    overflow-y: hidden;
     position: relative;
     display: flex;
-    width: 100%; /* Ensure it spans the parent width */
-    overflow-x: auto; /* Allow horizontal scrolling */
+    width: 100%;
+    overflow-x: auto;
     gap: 30px;
 
     &::-webkit-scrollbar {
-      display: none; /* Optional: Hide the scrollbar for a cleaner UI */
+      display: none;
     }
   }
 
   .item {
     position: relative;
-    flex: 0 0 500px; /* Ensure fixed width for each item */
+    flex: 0 0 500px;
     height: 400px;
     background-color: rosybrown;
+    transition: 0.4s;
+    cursor: pointer;
+    overflow: hidden;
 
     img {
+      transition: 0.4s;
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      transition: background-color 0.3s ease;
+      pointer-events: none;
+    }
+
+    &::before {
+      content: 'Join travel now!';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
+    }
+
+    &:hover::after {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    &:hover::before {
+      opacity: 1;
     }
 
     .info {
