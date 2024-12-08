@@ -15,7 +15,7 @@ const flags = [
 ];
 
 const MainPage = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const [actualLanguage, setActualLanguage] = useState(flags[0].src);
   const [actualLanguageName, setActualLanguageName] = useState(flags[0].name);
