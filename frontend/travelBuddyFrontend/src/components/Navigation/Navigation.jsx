@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { StyledNav } from './NavigationStyles';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +6,7 @@ import logo from '../../assets/logo.png';
 import ES from '../../assets/flags/ES.png';
 import PL from '../../assets/flags/PL.png';
 import GB from '../../assets/flags/GB.png';
-import LanguageSelect from './LanguageSelect/LanguageSelect';
+import StyledLanguageSelect from './LanguageSelect/LanguageSelect';
 
 const flags = [
   { src: GB, alt: 'Great Britain', name: 'en', language: 'English' },
@@ -16,9 +16,6 @@ const flags = [
 
 const MainPage = () => {
   const { t } = useTranslation();
-  const [openModal, setOpenModal] = useState(false);
-  const [actualLanguage, setActualLanguage] = useState(flags[0].src);
-  const [actualLanguageName, setActualLanguageName] = useState(flags[0].name);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('start');
 
@@ -31,11 +28,7 @@ const MainPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -77,15 +70,7 @@ const MainPage = () => {
           </Button>
         </div>
 
-        <LanguageSelect
-          actualLanguage={actualLanguage}
-          openModal={openModal}
-          actualLanguageName={actualLanguageName}
-          setActualLanguage={setActualLanguage}
-          setActualLanguageName={setActualLanguageName}
-          setOpenModal={setOpenModal}
-          flags={flags}
-        />
+        <StyledLanguageSelect flags={flags} />
       </nav>
     </StyledNav>
   );
