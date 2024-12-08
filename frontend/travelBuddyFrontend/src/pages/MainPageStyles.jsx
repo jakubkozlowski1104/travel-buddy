@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const StyledContainer = styled.div`
   position: relative;
-  top: 0;
+  top: -20vh;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -10,23 +10,23 @@ export const StyledContainer = styled.div`
   height: 500vh;
   width: 100vw;
   max-width: 100%;
-  background-color: white ;
+  background-color: hsl(0, 0%, 100%);
+  overflow-x: hidden;
 
   .start {
     background-color: #72e7ff;
-    height: 70vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: flex-start;
 
     .background-image {
       position: absolute;
-      top: -20vh;
+      top: 0vh;
       left: 0;
       width: 100%;
-      height: 90vh;
+      height: 100vh;
       object-fit: cover;
-      z-index: 1;
     }
 
     .overlay {

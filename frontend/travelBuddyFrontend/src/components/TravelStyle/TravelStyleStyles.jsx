@@ -22,10 +22,12 @@ export const StyledTravelStyles = styled.div`
         position: absolute;
         top: 10.3vh;
         left: 0;
-        width: 50px;
+        width: 150px;
         height: 400px;
         z-index: 15;
         cursor: pointer;
+        max-width: 100vw;
+        overflow: hidden;
         background: linear-gradient(
           to right,
           rgba(70, 212, 255, 1),
@@ -38,9 +40,11 @@ export const StyledTravelStyles = styled.div`
         top: 10.3vh;
         right: 0;
         cursor: pointer;
-        width: 50px;
+        width: 150px;
         height: 44vh;
         z-index: 15;
+        max-width: 100vw;
+        overflow: hidden;
         background: linear-gradient(
           to left,
           rgba(70, 212, 255, 1),

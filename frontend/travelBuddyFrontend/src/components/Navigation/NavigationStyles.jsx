@@ -4,7 +4,7 @@ export const StyledNav = styled.div`
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 100;
   nav {
     position: sticky;
     top: 0;
@@ -18,7 +18,6 @@ export const StyledNav = styled.div`
     align-items: center;
     transition: 0.3s;
 
-  
     .buttons {
       display: flex;
       justify-content: center;
@@ -29,7 +28,6 @@ export const StyledNav = styled.div`
         letter-spacing: 0.5px;
       }
     }
-
   }
 
   nav > * {
@@ -37,6 +35,7 @@ export const StyledNav = styled.div`
   }
 
   nav.scrolled {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -50,5 +49,6 @@ export const StyledNav = styled.div`
     position: sticky;
     height: 9vh;
     border-bottom: 2px solid #2cb9ff;
+    z-index: 100;
   }
 `;
