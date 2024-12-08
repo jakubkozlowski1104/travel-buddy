@@ -1,3 +1,4 @@
+
 import styled from '@emotion/styled';
 import palette from '../../themes/pallete';
 
@@ -19,24 +20,34 @@ export const StyledTravelStyles = styled.div`
 
       .scroll-left {
         position: absolute;
-        background-color: red;
-        top: 20vh;
+
+        top: 10.3vh;
         left: 0;
         width: 50px;
-        height: 200px;
+        height: 400px;
         z-index: 15;
+        cursor: pointer;
+        background: linear-gradient(
+          to right,
+          rgba(70, 212, 255, 1),
+          rgba(70, 212, 255, 0)
+        );
       }
 
       .scroll-right {
         position: absolute;
         top: 0;
         right: 0;
-        top: 20vh;
-
-        background-color: red;
+        top: 10.3vh;
+        cursor: pointer;
         width: 50px;
-        height: 200px;
+        height: 44vh;
         z-index: 15;
+        background: linear-gradient(
+          to left,
+          rgba(70, 212, 255, 1),
+          rgba(70, 212, 255, 0)
+        );
       }
       h1 {
         font-size: 2rem;
@@ -67,14 +78,18 @@ export const StyledTravelStyles = styled.div`
   .container {
     position: relative;
     display: flex;
-    justify-content: center;
-    width: 3000px;
+    width: 100%; /* Ensure it spans the parent width */
+    overflow-x: auto; /* Allow horizontal scrolling */
     gap: 30px;
+
+    &::-webkit-scrollbar {
+      display: none; /* Optional: Hide the scrollbar for a cleaner UI */
+    }
   }
 
   .item {
     position: relative;
-    flex-basis: 500px;
+    flex: 0 0 500px; /* Ensure fixed width for each item */
     height: 400px;
     background-color: rosybrown;
 
@@ -92,10 +107,8 @@ export const StyledTravelStyles = styled.div`
       color: white;
       display: flex;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 0;
       padding: 12px 23px;
 
       h2 {
