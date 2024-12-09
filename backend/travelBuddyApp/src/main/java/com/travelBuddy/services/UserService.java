@@ -78,20 +78,24 @@ public class UserService {
     private UserDTO convertToUserDTO(User user) {
         List<String> countriesVisited = user.getCountriesVisited()
                 .stream()
-                .map(visit -> visit.getCountry().getName()) // Pobranie nazwy kraju
+                .map(visit -> visit.getCountry().getName())
                 .collect(Collectors.toList());
 
         return new UserDTO(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
+                user.getPassword(),
                 user.getBio(),
                 user.getPhotoUrl(),
                 user.getInterests(),
+                user.getAge(),
+                user.getCountry(),
                 user.getCreatedAt(),
                 countriesVisited
         );
     }
+
 
     public List<UserDTO> getAllUsersAsDTO(int page, int size) {
         return userRepo.findAll(PageRequest.of(page, size, Sort.by("username")))

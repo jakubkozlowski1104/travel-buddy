@@ -33,9 +33,14 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     private String bio;
     private String photoUrl;
     private String interests;
+    private int age;
+    private String country;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
