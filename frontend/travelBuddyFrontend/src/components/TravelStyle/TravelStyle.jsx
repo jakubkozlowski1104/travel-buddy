@@ -43,7 +43,7 @@ const TravelStyle = () => {
   const stopScrolling = () => {
     clearInterval(scrollInterval);
   };
-
+  //xD
   return (
     <StyledTravelStyles translation={t('travelStyle.joinNow')}>
       <div className="center">
