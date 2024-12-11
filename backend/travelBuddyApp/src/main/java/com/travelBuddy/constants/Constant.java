@@ -1,6 +1,6 @@
-package com.travelBuddy.constants;
+    package com.travelBuddy.constants;
 
-public class Constant {
-    public static final String PHOTO_DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
-    public static final String X_REQUESTED_WITH = "X-Requested-With";
-}
+    public class Constant {
+        public static final String PHOTO_DIRECTORY = "D:/studies/pracaInzynierska/frontend/travelBuddyFrontend/public/usersPhotos";
+        public static final String X_REQUESTED_WITH = "X-Requested-With";
+    }
