@@ -1,6 +1,7 @@
 import { StyledContainer } from './MainPageStyles';
 import backgroundImage from '../assets/backgroud-first.jpg';
 import TravelStyle from '../components/TravelStyle/TravelStyle';
+import RecentTrips from '../components/RecentTrips/RecentTrips';
 
 const MainPage = () => {
   return (
@@ -11,9 +12,7 @@ const MainPage = () => {
       </section>
 
       <TravelStyle />
-      <section className="recent" id="recent">
-        Recent content
-      </section>
+      <RecentTrips className="recent" id="recent" />
       <section className="add">Add content</section>
       <section className="meet" id="meet">
         Meet content

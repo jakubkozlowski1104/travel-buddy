@@ -10,7 +10,7 @@ const TravelStyle = () => {
   const containerRef = useRef(null);
   const customOrder = [6, 5, 4, 1, 2, 8, 3];
   const { language } = useLanguage();
-  const { t } = useTranslation(); // Access the translation function
+  const { t } = useTranslation(); 
 
   useEffect(() => {
     const fetchTravelStyles = async () => {

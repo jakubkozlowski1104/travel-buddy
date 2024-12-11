@@ -26,7 +26,11 @@ public class TravelType {
     @Column(name = "name", unique = true, nullable = false, length = 70)
     private String name;
 
+    @Column(name = "photo_url", length = 255)
+    private String photoUrl;
+
     @JsonIgnore // Ignoruje pole trips podczas serializacji
     @ManyToMany(mappedBy = "travelTypes")
     private List<Trip> trips = new ArrayList<>();
 }
+    

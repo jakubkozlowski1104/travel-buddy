@@ -28,6 +28,9 @@ public class Country {
     @Column(name = "code", nullable = false, length = 3, unique = true)
     private String code;
 
+    @Column(name = "continent", length = 50)
+    private String continent;
+
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCountriesVisited> usersVisited;
 }
