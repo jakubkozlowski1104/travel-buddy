@@ -12,6 +12,7 @@ import {
 const RecentTrips = () => {
   const { t } = useTranslation();
   const [trips, setTrips] = useState([]);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,12 +28,34 @@ const RecentTrips = () => {
       }
     };
 
-    fetchTrips();
-  }, []);
+    const fetchPexelsPhotos = async () => {
+      const PEXELS_API_KEY = 'U1xaJzxEdI3UoLLPQdR49iQfkDp980LzgSoWIq55uhIgnaPlWKK305Rg';
+      const searchQuery = 'bali';
 
-  useEffect(() => {
-    console.log(trips);
-  }, [trips]);
+      try {
+        const response = await fetch(
+          `https://api.pexels.com/v1/search?query=${searchQuery}&per_page=20`,
+          {
+            headers: {
+              Authorization: PEXELS_API_KEY,
+            },
+          }
+        );
+        const data = await response.json();
+        const horizontalImages = data.photos.filter((photo) => photo.width > photo.height);
+        setImages(horizontalImages);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    const fetchData = async () => {
+      await fetchTrips();
+      await fetchPexelsPhotos();
+    };
+
+    fetchData();
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,14 +75,13 @@ const RecentTrips = () => {
           </h3>
         </div>
         <div className="trips-container">
-          {trips.map((trip) => (
+          {trips.map((trip, index) => (
             <div className="item" key={trip.tripId}>
               <div className="time-left">
                 {Math.max(
                   0,
                   Math.ceil(
-                    (new Date(trip.startDate) - new Date()) /
-                      (1000 * 60 * 60 * 24)
+                    (new Date(trip.startDate) - new Date()) / (1000 * 60 * 60 * 24)
                   )
                 ) > 99
                   ? `STARTS DATE ${new Date(
@@ -68,14 +90,16 @@ const RecentTrips = () => {
                   : `${Math.max(
                       0,
                       Math.ceil(
-                        (new Date(trip.startDate) - new Date()) /
-                          (1000 * 60 * 60 * 24)
+                        (new Date(trip.startDate) - new Date()) / (1000 * 60 * 60 * 24)
                       )
                     )} DAYS LEFT`}
               </div>
 
               <div className="img">
-                <img src="/travelTypes/test.jpg" alt="" />
+                <img
+                  src={images[index % images.length]?.src?.large || '/travelTypes/test.jpg'}
+                  alt={`Photo for ${trip.tripName}`}
+                />
               </div>
               <div className="details">
                 <div className="user">
