@@ -5,6 +5,7 @@ export const StyledLanguageSelect = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
+  font-family: 'Lato', sans-serif;
 
   div {
     margin: 5px;

@@ -5,6 +5,7 @@ export const StyledNav = styled.div`
   top: 0;
   left: 0;
   z-index: 100;
+  font-family: 'Lato', sans-serif;
   nav {
     position: sticky;
     top: 0;

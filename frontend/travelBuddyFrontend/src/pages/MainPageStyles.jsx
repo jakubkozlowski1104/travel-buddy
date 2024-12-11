@@ -10,8 +10,9 @@ export const StyledContainer = styled.div`
   height: 500vh;
   width: 100vw;
   max-width: 100%;
-  background-color: hsl(0, 0%, 100%);
   overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
+  background-color: #f8f8f8;
 
   .start {
     background-color: #72e7ff;
