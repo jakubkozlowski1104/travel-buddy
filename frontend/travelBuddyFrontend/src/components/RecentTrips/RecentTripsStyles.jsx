@@ -5,6 +5,7 @@ export const StyledRecentTrips = styled.div`
   position: relative;
   margin-top: 5vh;
   width: 100vw;
+  min-height: 1200px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -65,13 +66,13 @@ export const StyledRecentTrips = styled.div`
           top: 2vh;
           right: 1vw;
           position: absolute;
-          width: 120px;
           height: 35px;
           display: flex;
           justify-content: center;
           align-items: center;
           color: white;
           border-radius: 50px;
+          padding: 10px 20px;
           font-size: 1rem;
           background: linear-gradient(
             90deg,
