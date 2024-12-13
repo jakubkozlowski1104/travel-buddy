@@ -36,7 +36,7 @@ const RecentTrips = () => {
     const fetchImagesForTrips = async () => {
       const PEXELS_API_KEY =
         'U1xaJzxEdI3UoLLPQdR49iQfkDp980LzgSoWIq55uhIgnaPlWKK305Rg';
-      const newImages = {}; // Tymczasowy obiekt na przechowywanie obrazów
+      const newImages = {}; 
 
       const imageFetches = trips.map(async (trip) => {
         const countryName = trip.tripName;
