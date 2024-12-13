@@ -6,6 +6,7 @@ export const StyledMenu = styled.div`
   align-items: center;
   padding: 0 20px;
   flex: 5;
+  font-family: 'Lato', sans-serif;
 
   li.active {
     color: #48f3ff;

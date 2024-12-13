@@ -8,15 +8,16 @@ import { useTranslation } from 'react-i18next';
 const TravelStyle = () => {
   const [travelStyles, setTravelStyles] = useState([]);
   const containerRef = useRef(null);
-  const customOrder = [6, 5, 4, 1, 2, 7, 3];
+  const customOrder = [6, 5, 4, 1, 2, 8, 3];
   const { language } = useLanguage();
-  const { t } = useTranslation(); // Access the translation function
+  const { t } = useTranslation(); 
 
   useEffect(() => {
     const fetchTravelStyles = async () => {
       try {
         const response = await fetch('http://localhost:8080/travel-types');
         const data = await response.json();
+        console.log(response.data);
         setTravelStyles(data);
       } catch (error) {
         console.error('Error fetching travel styles:', error);
@@ -43,7 +44,7 @@ const TravelStyle = () => {
   const stopScrolling = () => {
     clearInterval(scrollInterval);
   };
-
+  //xD
   return (
     <StyledTravelStyles translation={t('travelStyle.joinNow')}>
       <div className="center">
@@ -73,7 +74,7 @@ const TravelStyle = () => {
           .sort((a, b) => customOrder.indexOf(a.id) - customOrder.indexOf(b.id))
           .map((style) => (
             <div className="item" key={style.id}>
-              <img src={style.imageUrl} alt={style.name} />
+              <img src={style.photoUrl} alt={style.name} />
               <div className="info">
                 <h2>{style.name}</h2>
                 <p>
