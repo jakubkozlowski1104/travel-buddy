@@ -14,7 +14,16 @@
     "h1": "What is your travel style?",
     "slogan": "Find yourself",
     "search": "Search travel by type",
-    "tours": "Podróży",
+    "tours": "Trips",
     "joinNow": "Join a trip!"
+  },
+  "recentTrips": {
+    "h1": "Discover Upcoming Trips",
+    "slogan": "Don't wait, the world is waiting!",
+    "search": "Search for upcoming trips",
+    "daysLeft": "DAYS LEFT",
+    "budget1": "BUDGET",
+    "budget2": "ESTIMATED",
+    "days": "days"
   }
 }

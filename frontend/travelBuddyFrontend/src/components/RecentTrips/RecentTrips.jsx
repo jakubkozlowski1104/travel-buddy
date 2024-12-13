@@ -36,7 +36,7 @@ const RecentTrips = () => {
     const fetchImagesForTrips = async () => {
       const PEXELS_API_KEY =
         'U1xaJzxEdI3UoLLPQdR49iQfkDp980LzgSoWIq55uhIgnaPlWKK305Rg';
-      const newImages = {}; 
+      const newImages = {};
 
       const imageFetches = trips.map(async (trip) => {
         const countryName = trip.tripName;
@@ -82,10 +82,10 @@ const RecentTrips = () => {
     <StyledRecentTrips id="recent">
       <div className="center">
         <div className="banner">
-          <h1>{t('travelStyle.h1')}</h1>
-          <h3 className="slogan">{t('travelStyle.slogan')}</h3>
+          <h1>{t('recentTrips.h1')}</h1>
+          <h3 className="slogan">{t('recentTrips.slogan')}</h3>
           <h3 className="search">
-            {t('travelStyle.search')}
+            {t('recentTrips.search')}
             <i>
               <FontAwesomeIcon icon={faArrowRight} />
             </i>
@@ -111,7 +111,7 @@ const RecentTrips = () => {
                         (new Date(trip.startDate) - new Date()) /
                           (1000 * 60 * 60 * 24)
                       )
-                    )} DAYS LEFT`}
+                    )}   ${t('recentTrips.daysLeft')}`}
               </div>
 
               <div className="img">
@@ -149,7 +149,9 @@ const RecentTrips = () => {
                       <i>
                         <FontAwesomeIcon icon={faCalendar} />
                       </i>
-                      <p>{trip.daysOfTravel} days</p>
+                      <p>
+                        {trip.daysOfTravel} {t('recentTrips.days')}
+                      </p>
                     </div>
                     <div className="more-info">
                       <i>
@@ -160,8 +162,8 @@ const RecentTrips = () => {
                   </div>
                   <div className="right-info">
                     <div className="price-name">
-                      <div className="budget">BUDGET</div>
-                      <div className="budget">ESTIMATED</div>
+                      <div className="budget">{t('recentTrips.budget1')}</div>
+                      <div className="budget">{t('recentTrips.budget2')}</div>
                     </div>
                     <div className="price">
                       {trip.estimatedCost}

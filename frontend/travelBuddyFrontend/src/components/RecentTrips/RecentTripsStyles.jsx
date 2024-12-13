@@ -160,7 +160,7 @@ export const StyledRecentTrips = styled.div`
                 align-items: center;
                 gap: 7px;
                 padding: 2px 20px;
-                border-right: 1px solid gray;
+                border-right: 1px solid lightgray;
                 margin-right: 10px;
 
                 i {

@@ -14,7 +14,16 @@
     "h1": "Jaki jest Twój styl podróży?",
     "slogan": "Odkryj siebie",
     "search": "Szukaj podróży według typu",
-    "tours": "Tripów",
+    "tours": "Podróży",
     "joinNow": "Dołącz do podróży!"
+  },
+  "recentTrips": {
+    "h1": "Odkryj najbliższe podróże",
+    "slogan": "Nie zwlekaj, świat czeka!",
+    "search": "Szukaj najbliższych podróży",
+    "daysLeft": "DNI ZOSTAŁO",
+    "budget1": "KOSZTA",
+    "budget2": "PRZEWIDYWANE",
+    "days": "dni"
   }
 }

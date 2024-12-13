@@ -16,5 +16,14 @@
     "search": "Busca viajes por tipo",
     "tours": "Viajes",
     "joinNow": "¡Únete al viaje!  "
+  },
+  "recentTrips": {
+    "h1": "Descubre los Próximos Viajes",
+    "slogan": "¡No esperes, el mundo te espera!",
+    "search": "Busca los próximos viajes",
+    "daysLeft": "DÍAS RESTANTES",
+    "budget1": "COSTOS",
+    "budget2": "ESTIMADOS",
+    "days": "días"
   }
 }
