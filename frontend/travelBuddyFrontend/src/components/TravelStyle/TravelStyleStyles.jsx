@@ -8,7 +8,7 @@ export const StyledTravelStyles = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-bottom: 40px;  
+  margin-bottom: 10px;
 
   .center {
     display: flex;

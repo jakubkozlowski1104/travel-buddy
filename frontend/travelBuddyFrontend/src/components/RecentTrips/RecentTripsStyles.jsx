@@ -98,7 +98,9 @@ export const StyledRecentTrips = styled.div`
           flex-grow: 1;
           position: relative;
           padding: 20px 15px;
+          padding-bottom: 10px;
           box-shadow: 20px 10px 50px rgba(0, 0, 0, 0.3);
+          background-color: white;
 
           .user {
             position: absolute;
@@ -138,8 +140,9 @@ export const StyledRecentTrips = styled.div`
           h1 {
             padding: 15px;
             margin: 0;
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             padding-top: 40px;
+            padding-bottom: 2px;
           }
 
           .bottom-info {
