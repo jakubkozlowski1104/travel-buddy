@@ -3,18 +3,18 @@ import palette from '../../themes/pallete';
 
 export const StyledTravelStyles = styled.div`
   position: relative;
-  margin-top: 5vh;
+  margin-top: 10vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-bottom: 50px;
+  margin-bottom: 40px;  
 
   .center {
     display: flex;
     justify-content: center;
     .banner {
-      width: 70vw;
+      width: 65vw;
       display: flex;
       align-items: center;
 
@@ -157,6 +157,7 @@ export const StyledTravelStyles = styled.div`
       align-items: center;
       justify-content: space-between;
       padding: 12px 23px;
+      margin-bottom: 20px;
 
       h2 {
         margin: 0;
