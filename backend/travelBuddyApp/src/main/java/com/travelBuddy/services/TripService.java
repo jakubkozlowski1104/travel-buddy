@@ -97,10 +97,12 @@ public class TripService {
         return tripRepo.findAll();
     }
 
-    // Pobranie Tripa na podstawie ID
+    @Transactional
     public Trip getTripById(Long tripId) {
-        return tripRepo.findById(tripId)
+        Trip trip = tripRepo.findById(tripId)
                 .orElseThrow(() -> new RuntimeException("Trip not found with ID: " + tripId));
+        trip.getUsers().size(); // Force initialization of the users collection
+        return trip;
     }
 
     // Pobranie Tripów użytkownika

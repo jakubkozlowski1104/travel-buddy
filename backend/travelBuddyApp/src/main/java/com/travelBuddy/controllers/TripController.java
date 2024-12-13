@@ -1,5 +1,6 @@
 package com.travelBuddy.controllers;
 
+import com.travelBuddy.DTO.TripResponseDTO;
 import com.travelBuddy.models.*;
 import com.travelBuddy.DTO.TripRequestDTO;
 import com.travelBuddy.services.TripService;
@@ -32,9 +33,14 @@ public class TripController {
 
 
     @GetMapping
-    public ResponseEntity<List<Trip>> getAllTrips() {
-        return ResponseEntity.ok(tripService.getAllTrips());
+    public ResponseEntity<List<TripResponseDTO>> getAllTrips() {
+        List<Trip> trips = tripService.getAllTrips();
+        List<TripResponseDTO> responseDTOs = trips.stream()
+                .map(this::mapToResponseDTO)
+                .toList();
+        return ResponseEntity.ok(responseDTOs);
     }
+
 
     @GetMapping("/{tripId}")
     public ResponseEntity<Trip> getTripById(@PathVariable Long tripId) {
@@ -116,5 +122,25 @@ public class TripController {
 
         return trip;
     }
+
+    private TripResponseDTO mapToResponseDTO(Trip trip) {
+        TripResponseDTO responseDTO = new TripResponseDTO();
+        responseDTO.setTripId(trip.getTripId());
+        responseDTO.setTripName(trip.getTripName());
+        responseDTO.setDaysOfTravel(trip.getDaysOfTravel());
+        responseDTO.setEstimatedCost(trip.getEstimatedCost());
+        responseDTO.setStartDate(trip.getStartDate());
+        responseDTO.setEndDate(trip.getEndDate());
+        responseDTO.setDescription(trip.getDescription());
+        responseDTO.setLookingFor(trip.getLookingFor());
+
+        responseDTO.setTravelTypes(trip.getTravelTypes());
+        responseDTO.setCountries(trip.getCountries());
+        responseDTO.setUsers(trip.getUsers());
+
+        return responseDTO;
+    }
+
+
 
 }
