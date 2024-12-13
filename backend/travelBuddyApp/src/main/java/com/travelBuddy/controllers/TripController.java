@@ -124,7 +124,7 @@ public class TripController {
     }
 
     private TripResponseDTO mapToResponseDTO(Trip trip) {
-        TripResponseDTO responseDTO = new TripResponseDTO();
+        TripResponseDTO responseDTO = new TripResponseDTO(); //nowe
         responseDTO.setTripId(trip.getTripId());
         responseDTO.setTripName(trip.getTripName());
         responseDTO.setDaysOfTravel(trip.getDaysOfTravel());
