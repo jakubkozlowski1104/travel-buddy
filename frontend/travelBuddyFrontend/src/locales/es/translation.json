@@ -25,5 +25,11 @@
     "budget1": "COSTOS",
     "budget2": "ESTIMADOS",
     "days": "días"
+  },
+  "startTrip": {
+    "header": "¡Crea tu propio viaje!",
+    "description": "¿Estás planeando un viaje? ¿Buscas personas que se unan a ti? Solo envía tu viaje y completa el formulario",
+    "button": "Crear un viaje",
+    "note": "¡No esperes, haz clic para crear un viaje!"
   }
 }

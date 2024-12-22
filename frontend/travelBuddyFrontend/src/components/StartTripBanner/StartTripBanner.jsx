@@ -2,28 +2,33 @@ import React from 'react';
 import { StyledStartContainer } from './StartTripBannerStyles';
 import { Button } from '@mui/material';
 import logo from '../../assets/logo.png';
+import { useTranslation } from 'react-i18next';
 
 const StartTripBanner = () => {
+  const { t } = useTranslation(); // Inicjalizacja tłumaczeń
+
   return (
     <StyledStartContainer>
       <div className="img">
-        <img src="/bannerJoinTrip.jpg" alt="startTravel" />
+        <img src="/bannerJoinTrip.jpg" alt={t('startTrip.days')} />{' '}
+        {/* Dodane tłumaczenie */}
       </div>
       <div className="center">
         <div className="img-logo">
-          <img src={logo} alt="" />
+          <img src={logo} alt="logo" />
         </div>
         <div className="info">
-          <div className="slogan">Create your own travel!</div>
+          <div className="slogan">{t('startTrip.header')}</div>{' '}
+          {/* Tłumaczenie nagłówka */}
           <div className="description">
-            Planujesz wyjazd? Wystarczy, że wypełnisz formularz i zgłosisz swoją
-            podróż, a zgłoszą się chętni by jechać z tobą
+            {t('startTrip.description')} {/* Tłumaczenie sloganu */}
           </div>
           <div className="bottom">
             <Button color="secondary" variant="contained" className="btn">
-              Create
+              {t('startTrip.button')} {/* Tłumaczenie przycisku */}
             </Button>
-            <div className="text">Nie zwlekaj kliknij by storzyc podróż!</div>
+            <div className="text">{t('startTrip.note')}</div>{' '}
+            {/* Tłumaczenie tekstu */}
           </div>
         </div>
       </div>

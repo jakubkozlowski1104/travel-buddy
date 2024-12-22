@@ -25,5 +25,11 @@
     "budget1": "KOSZTA",
     "budget2": "PRZEWIDYWANE",
     "days": "dni"
+  },
+  "startTrip": {
+    "header": "Stwórz własną podróż!",
+    "description": "Planujesz wyjazd? Szukasz osób które pojadą z tobą? Wystarczy, że zgłosisz swoją podróż i wypełnisz formularz",
+    "button": "Stwórz podróż",
+    "note": "Nie zwlekaj, kliknij by stworzyć podróż!"
   }
 }
