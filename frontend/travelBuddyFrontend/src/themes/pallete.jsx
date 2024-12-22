@@ -8,7 +8,7 @@ const palette = {
     lightBlue: '#42e4ed',
   },
   secondary: {
-    main: '#00b4d8',
+    main: '#b8e6ef',
     light: '#90e0ef',
     dark: '#0077b6',
   },

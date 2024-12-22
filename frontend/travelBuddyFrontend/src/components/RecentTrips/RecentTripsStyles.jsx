@@ -12,6 +12,8 @@ export const StyledRecentTrips = styled.div`
   margin-bottom: 50px;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
+  padding-bottom: 0px;
+  margin-bottom: -100px;
 
   .center {
     display: flex;

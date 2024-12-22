@@ -148,7 +148,7 @@ export const StyledTravelStyles = styled.div`
 
     .info {
       position: absolute;
-      bottom: 0;
+      bottom: 10px;
       left: 0;
       width: 100%;
       color: white;
