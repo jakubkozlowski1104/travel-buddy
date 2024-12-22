@@ -25,5 +25,11 @@
     "budget1": "BUDGET",
     "budget2": "ESTIMATED",
     "days": "days"
+  },
+  "startTrip": {
+    "header": "Create your own trip!",
+    "description": "Are you planning a trip? Looking for people to join you? Just submit your trip and fill out the form",
+    "button": "Create a trip",
+    "note": "Don't wait, click to create a trip!"
   }
 }

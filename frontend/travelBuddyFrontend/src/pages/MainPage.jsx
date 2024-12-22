@@ -2,6 +2,7 @@ import { StyledContainer } from './MainPageStyles';
 import backgroundImage from '../assets/backgroud-first.jpg';
 import TravelStyle from '../components/TravelStyle/TravelStyle';
 import RecentTrips from '../components/RecentTrips/RecentTrips';
+import StartTripBanner from '../components/StartTripBanner/StartTripBanner';
 
 const MainPage = () => {
   return (
@@ -13,7 +14,7 @@ const MainPage = () => {
 
       <TravelStyle />
       <RecentTrips className="recent" id="recent" />
-      <section className="add">Add content</section>
+      <StartTripBanner className="add" />
       <section className="meet" id="meet">
         Meet content
       </section>
