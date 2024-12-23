@@ -8,8 +8,11 @@ export const StyledMeetContent = styled.div`
   font-family: 'Lato', sans-serif;
   width: 100%;
   margin: 40px;
+  transition: 1s;
+  transition: 0.3s;
 
   .center {
+    transition: 1s;
     position: relative;
     z-index: 3;
     width: 300px;
@@ -17,6 +20,7 @@ export const StyledMeetContent = styled.div`
     width: 66%;
     justify-content: center;
     margin: auto;
+    transition: 0.3s;
 
     .left-arrow {
       cursor: pointer;
@@ -53,88 +57,95 @@ export const StyledMeetContent = styled.div`
         font-size: 40px;
       }
     }
-
-    .people {
-      display: flex;
-      gap: 0px;
-      height: 100%;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-
-      .person {
+    .people-wrapper {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      transition: 0.3s;
+      .people {
         display: flex;
-        flex-direction: column;
-        width: 400px;
+        gap: 0px;
         height: 100%;
-        .top {
-          position: relative;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        will-change: transform;
+
+        .person {
           display: flex;
-          justify-content: center;
-          flex: 1;
-          overflow: hidden;
-
-          img {
-            width: 93%;
-          }
-
-          .user-info {
-            position: absolute;
-            bottom: 3px;
-            left: 15px;
-            color: white;
-            font-size: 1.1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-          }
-        }
-
-        .bottom {
-          display: flex;
-
-          .chat,
-          .wave {
-            cursor: pointer;
-            padding: 5px;
-            flex: 1;
-            text-align: center;
-            font-size: 1.1rem;
-            color: #0f5987; /* Kolor początkowy tekstu */
-            transition: color 0.3s; /* Animacja zmiany koloru tekstu */
-
-            i {
-              color: #0f5987; /* Kolor początkowy ikony */
-              transition: color 0.3s; /* Animacja zmiany koloru ikony */
-            }
-
-            &:hover {
-              color: red; /* Kolor tekstu po najechaniu */
-            }
-
-            &:hover i {
-              color: red; /* Kolor ikony po najechaniu */
-            }
-          }
-
-          .wave {
+          flex-direction: column;
+          width: 400px;
+          height: 100%;
+          .top {
             position: relative;
+            display: flex;
+            justify-content: center;
+            flex: 1;
+            overflow: hidden;
+
+            img {
+              width: 93%;
+            }
+
+            .user-info {
+              position: absolute;
+              bottom: 3px;
+              left: 15px;
+              color: white;
+              font-size: 1.1rem;
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
           }
 
-          .wave:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 90%;
-            width: 3px;
-            background-color: #0f5987; /* Pasek obok tekstu */
-            transition: background-color 0.3s; /* Dodanie płynności zmiany koloru (opcjonalne) */
-          }
+          .bottom {
+            display: flex;
 
-          /* Usunięcie zmiany koloru pseudo-elementu przy hover */
-          .wave:hover {
-            color: red; /* Kolor tekstu na czerwony */
-          }
+            .chat,
+            .wave {
+              cursor: pointer;
+              padding: 5px;
+              flex: 1;
+              text-align: center;
+              font-size: 1.1rem;
+              color: #0f5987; /* Kolor początkowy tekstu */
+              transition: color 0.3s; /* Animacja zmiany koloru tekstu */
 
-          .wave:hover:after {
-            background-color: #0f5987; /* Pasek pozostaje niezmieniony */
+              i {
+                color: #0f5987; /* Kolor początkowy ikony */
+                transition: color 0.3s; /* Animacja zmiany koloru ikony */
+              }
+
+              &:hover {
+                color: red; /* Kolor tekstu po najechaniu */
+              }
+
+              &:hover i {
+                color: red; /* Kolor ikony po najechaniu */
+              }
+            }
+
+            .wave {
+              position: relative;
+            }
+
+            .wave:after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 90%;
+              width: 3px;
+              background-color: #0f5987; /* Pasek obok tekstu */
+              transition: background-color 0.3s; /* Dodanie płynności zmiany koloru (opcjonalne) */
+            }
+
+            /* Usunięcie zmiany koloru pseudo-elementu przy hover */
+            .wave:hover {
+              color: red; /* Kolor tekstu na czerwony */
+            }
+
+            .wave:hover:after {
+              background-color: #0f5987; /* Pasek pozostaje niezmieniony */
+            }
           }
         }
       }
