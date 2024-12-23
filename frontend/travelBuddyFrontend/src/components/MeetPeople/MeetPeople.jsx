@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { StyledMeetContent } from './MeetPeople.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHand, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faComment, faUser } from '@fortawesome/free-regular-svg-icons';
 import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import basicPhoto from '../../../public/users/userimg.jpg';
+import basicPhoto from '/users/userimg.jpg';
 
 const MeetPeople = () => {
   const [users, setUsers] = useState([]);
