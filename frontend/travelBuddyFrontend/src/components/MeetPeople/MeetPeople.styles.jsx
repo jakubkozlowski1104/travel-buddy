@@ -6,12 +6,12 @@ export const StyledMeetContent = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  flex: 1;
   font-family: 'Lato', sans-serif;
   width: 100%;
   margin: 40px;
   transition: 1s;
   transition: 0.3s;
+  margin-bottom: 60px;
 
   .center-header {
     width: 66%;

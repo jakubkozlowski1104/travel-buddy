@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { StyledHowItWorks } from './HowItWorks.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faMap,
-  faHandPointer,
-  faUsers,
-} from '@fortawesome/free-regular-svg-icons';
+import { faMap, faHandPointer } from '@fortawesome/free-regular-svg-icons';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-{
-  /*  /> */
-}
-{
-  /* <FontAwesomeIcon icon={faUsers} />
-   */
-}
+
 const HowItWorks = () => {
   return (
     <StyledHowItWorks>
       <div className="center">
         <div className="items">
           <div className="slogan">
-            <div className="header">How its works?</div>
-            <div className="search-text">SEARCH</div>
-            <div className="create-text">CREATE</div>
-            <div className="meet-text">MEET</div>
+            <h2 className="header">How its works?</h2>
+            <div className="names">
+              <p className="search-text">SEARCH-</p>
+              <p className="create-text">CREATE-</p>
+              <p className="meet-text">MEET</p>
+            </div>
           </div>
 
           <div className="item">
@@ -53,7 +46,7 @@ const HowItWorks = () => {
           <div className="item">
             <div className="graphic">
               <i>
-                <FontAwesomeIcon icon={faMap} />
+                <FontAwesomeIcon icon={faUsers} />
               </i>
             </div>
             <div className="info">
