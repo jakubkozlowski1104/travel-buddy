@@ -4,6 +4,7 @@ import TravelStyle from '../components/TravelStyle/TravelStyle';
 import RecentTrips from '../components/RecentTrips/RecentTrips';
 import StartTripBanner from '../components/StartTripBanner/StartTripBanner';
 import MeetPeople from '../components/MeetPeople/MeetPeople';
+import HowItWorks from '../components/HowItWorks/HowItWorks';
 
 const MainPage = () => {
   return (
@@ -17,7 +18,7 @@ const MainPage = () => {
       <RecentTrips className="recent" id="recent" />
       <StartTripBanner className="add" />
       <MeetPeople className="meet" id="meet" />
-      <section className="how">How it works?</section>
+      <HowItWorks className="how" />
       <footer className="footer">stópka</footer>
     </StyledContainer>
   );

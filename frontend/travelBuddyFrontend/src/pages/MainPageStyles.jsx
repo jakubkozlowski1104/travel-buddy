@@ -54,7 +54,7 @@ export const StyledContainer = styled.div`
   }
   .how {
     background-color: blue;
-    height: 80vh;
+    height: 10vh;
   }
   .footer {
     background-color: #494949;
