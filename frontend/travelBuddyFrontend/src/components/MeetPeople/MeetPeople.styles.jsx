@@ -1,15 +1,41 @@
 import styled from '@emotion/styled';
+import palette from '../../themes/pallete';
 
 export const StyledMeetContent = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   flex: 1;
   font-family: 'Lato', sans-serif;
   width: 100%;
   margin: 40px;
   transition: 1s;
   transition: 0.3s;
+
+  .center-header {
+    width: 66%;
+    justify-content: center;
+    margin: auto;
+
+    .banner {
+      width: 66vw;
+      display: flex;
+      align-items: center;
+      margin-left: 5px;
+      h1 {
+        font-size: 2rem;
+      }
+      .slogan {
+        flex-grow: 1;
+        color: ${palette.primary.lightBlue};
+        font-size: 1rem;
+        margin-top: 20px;
+        font-weight: 400;
+        margin-left: 20px;
+      }
+    }
+  }
 
   .center {
     transition: 1s;

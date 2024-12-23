@@ -7,8 +7,11 @@ import {
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import basicPhoto from '/users/userimg.jpg';
+import { useTranslation } from 'react-i18next';
 
 const MeetPeople = () => {
+  const { t } = useTranslation();
+
   const [users, setUsers] = useState([]);
   const [visibleUsers, setVisibleUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,6 +63,15 @@ const MeetPeople = () => {
 
   return (
     <StyledMeetContent id="meet">
+      <div className="center-header">
+        <div className="banner">
+          <h1>Meet new people </h1>
+          <h3 className="slogan">
+            You can find travelers from more than 100 countries at TravelBuddy.
+          </h3>
+        </div>
+      </div>
+
       <div className="center">
         <div className="left-arrow" onClick={handlePrev}>
           <i>
