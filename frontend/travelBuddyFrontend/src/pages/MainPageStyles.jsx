@@ -2,62 +2,49 @@ import styled from '@emotion/styled';
 
 export const StyledContainer = styled.div`
   position: relative;
-  top: -20vh;
-  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 500vh;
   width: 100vw;
   max-width: 100%;
   overflow-x: hidden;
   font-family: 'Lato', sans-serif;
-  background-color: #f8f8f8;
+  min-height: 100vh; /* Zapewnia pełną wysokość widoku */
 
   .start {
+    position: absolute;
+    top: -10vh;
     background-color: #72e7ff;
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    position: relative;
 
     .background-image {
       position: absolute;
-      top: 0vh;
+      top: -20vh; /* Przywrócenie przesunięcia na obraz */
       left: 0;
       width: 100%;
-      height: 100vh;
+      height: calc(100vh + 20vh); /* Umożliwia pokrycie całego obszaru */
       object-fit: cover;
     }
 
     .overlay {
       position: absolute;
-      top: 0;
+      top: -20vh; /* Dopasowanie do obrazu */
       left: 0;
       width: 100%;
-      height: 90;
-      background-color: rgba(0, 0, 0, 0.8);
+      height: calc(100vh + 20vh); /* Dopasowanie do obrazu */
+      background-color: rgba(0, 0, 0, 0.3);
       z-index: 10;
     }
   }
-  .recent {
-    background-color: #ff66d6;
-    height: 90vh;
-  }
-  .add {
-    background-color: #23ff89;
-    height: 70vh;
-  }
-  .meet {
-    background-color: #4fffd9;
-    height: 50vh;
-  }
-  .how {
-    background-color: blue;
-    height: 10vh;
-  }
+
   .footer {
-    background-color: #494949;
+    background-color: blue;
+    width: 100%;
     height: 15vh;
+    margin-top: auto; /* Stopka zawsze na dole */
   }
 `;

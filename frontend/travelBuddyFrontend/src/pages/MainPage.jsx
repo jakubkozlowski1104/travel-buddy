@@ -5,6 +5,7 @@ import RecentTrips from '../components/RecentTrips/RecentTrips';
 import StartTripBanner from '../components/StartTripBanner/StartTripBanner';
 import MeetPeople from '../components/MeetPeople/MeetPeople';
 import HowItWorks from '../components/HowItWorks/HowItWorks';
+import Footer from '../components/Footer/Footer';
 
 const MainPage = () => {
   return (
@@ -19,7 +20,7 @@ const MainPage = () => {
       <StartTripBanner className="add" />
       <MeetPeople className="meet" id="meet" />
       <HowItWorks className="how" />
-      <footer className="footer">stópka</footer>
+      <Footer className="footer" />
     </StyledContainer>
   );
 };
