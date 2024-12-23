@@ -65,10 +65,8 @@ const MeetPeople = () => {
     <StyledMeetContent id="meet">
       <div className="center-header">
         <div className="banner">
-          <h1>Meet new people </h1>
-          <h3 className="slogan">
-            You can find travelers from more than 100 countries at TravelBuddy.
-          </h3>
+          <h1>{t('meetPeople.header')}</h1>
+          <h3 className="slogan">{t('meetPeople.description')}</h3>
         </div>
       </div>
 
