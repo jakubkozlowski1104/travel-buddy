@@ -3,6 +3,8 @@ import { StyledMeetContent } from './MeetPeople.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons'; // Zmieniono na 'free-regular-svg-icons'
 import { faHand } from '@fortawesome/free-regular-svg-icons'; // Zmieniono na 'free-regular-svg-icons'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const MeetPeople = () => {
   const [users, setUsers] = useState([]);
@@ -34,6 +36,17 @@ const MeetPeople = () => {
   return (
     <StyledMeetContent id="meet">
       <div className="center">
+        <div className="left-arrow">
+          <i>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </i>
+        </div>
+        <div className="right-arrow">
+          <i>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </i>
+        </div>
+
         <div className="people">
           {users.map((user) => (
             <div className="person" key={user.id}>
@@ -54,7 +67,11 @@ const MeetPeople = () => {
                   chat
                 </div>
                 <div className="wave">
-                  <FontAwesomeIcon icon={faHand} /> wave
+                  <i>
+                    <FontAwesomeIcon icon={faHand} />
+                  </i>
+                  {'  '}
+                  wave
                 </div>
               </div>
             </div>

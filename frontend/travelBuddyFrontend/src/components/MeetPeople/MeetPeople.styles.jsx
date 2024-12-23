@@ -18,6 +18,42 @@ export const StyledMeetContent = styled.div`
     justify-content: center;
     margin: auto;
 
+    .left-arrow {
+      cursor: pointer;
+      position: absolute;
+      top: calc(50% - 40px); /* 50% od góry minus połowa wysokości */
+      left: -68px;
+      width: 50px;
+      height: 80px;
+      background-color: #0f5987;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        color: white;
+        font-size: 40px;
+      }
+    }
+
+    .right-arrow {
+      cursor: pointer;
+      position: absolute;
+      top: calc(50% - 40px); /* 50% od góry minus połowa wysokości */
+      right: -68px;
+      width: 50px;
+      height: 80px;
+      background-color: #0f5987;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        color: white;
+        font-size: 40px;
+      }
+    }
+
     .people {
       display: flex;
       gap: 0px;
@@ -45,18 +81,36 @@ export const StyledMeetContent = styled.div`
             bottom: 3px;
             left: 15px;
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
           }
         }
 
         .bottom {
           display: flex;
+
           .chat,
           .wave {
+            cursor: pointer;
             padding: 5px;
             flex: 1;
             text-align: center;
             font-size: 1.1rem;
+            color: #0f5987; /* Kolor początkowy tekstu */
+            transition: color 0.3s; /* Animacja zmiany koloru tekstu */
+
+            i {
+              color: #0f5987; /* Kolor początkowy ikony */
+              transition: color 0.3s; /* Animacja zmiany koloru ikony */
+            }
+
+            &:hover {
+              color: red; /* Kolor tekstu po najechaniu */
+            }
+
+            &:hover i {
+              color: red; /* Kolor ikony po najechaniu */
+            }
           }
 
           .wave {
@@ -70,7 +124,17 @@ export const StyledMeetContent = styled.div`
             left: 0;
             height: 90%;
             width: 3px;
-            background-color: #6fceee;
+            background-color: #0f5987; /* Pasek obok tekstu */
+            transition: background-color 0.3s; /* Dodanie płynności zmiany koloru (opcjonalne) */
+          }
+
+          /* Usunięcie zmiany koloru pseudo-elementu przy hover */
+          .wave:hover {
+            color: red; /* Kolor tekstu na czerwony */
+          }
+
+          .wave:hover:after {
+            background-color: #0f5987; /* Pasek pozostaje niezmieniony */
           }
         }
       }
