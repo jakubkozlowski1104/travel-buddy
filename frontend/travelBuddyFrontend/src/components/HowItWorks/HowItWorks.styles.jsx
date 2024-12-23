@@ -10,7 +10,7 @@ export const StyledHowItWorks = styled.div`
   width: 100%;
   transition: 1s;
   transition: 0.3s;
-  padding: 50px 0;
+  padding: 90px 0;
 
   .center {
     width: 65.5%;
