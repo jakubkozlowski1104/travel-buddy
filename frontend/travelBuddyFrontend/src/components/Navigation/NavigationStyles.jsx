@@ -11,13 +11,19 @@ export const StyledNav = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 20vh;
+    height: 11vh;
     color: white;
     display: flex;
     padding: 20px 250px;
     justify-content: space-between;
     align-items: center;
     transition: 0.3s;
+    background: linear-gradient(90deg, #5ca2d3, #75d5ee);
+
+    .logo {
+      transition: 0.3s;
+      width: 13%;
+    }
 
     .buttons {
       display: flex;
@@ -46,10 +52,15 @@ export const StyledNav = styled.div`
     justify-content: space-between;
     align-items: center;
     transition: 0.3s;
-    background-color: #486b6a;
+    background: linear-gradient(90deg, #004475, #75d5ee);
     position: sticky;
-    height: 9vh;
-    border-bottom: 2px solid #2cb9ff;
+    height: 7vh;
+    border-bottom: 4px solid #2cb9ff;
     z-index: 100;
+
+    .logo {
+      transition: 0.3s;
+      width: 10%;
+    }
   }
 `;
