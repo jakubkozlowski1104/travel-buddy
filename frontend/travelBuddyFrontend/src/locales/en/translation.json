@@ -31,5 +31,9 @@
     "description": "Are you planning a trip? Looking for people to join you? Just submit your trip and fill out the form",
     "button": "Create a trip",
     "note": "Don't wait, click to create a trip!"
+  },
+  "meetPeople": {
+    "header": "Meet new friends",
+    "description": "You can find travelers from more than 100 countries at TravelBuddy."
   }
 }

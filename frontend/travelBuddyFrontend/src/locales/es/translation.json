@@ -31,5 +31,9 @@
     "description": "¿Estás planeando un viaje? ¿Buscas personas que se unan a ti? Solo envía tu viaje y completa el formulario",
     "button": "Crear un viaje",
     "note": "¡No esperes, haz clic para crear un viaje!"
+  },
+  "meetPeople": {
+    "header": "Conoce nuevos amigos",
+    "description": "Puedes encontrar viajeros de más de 100 países en TravelBuddy."
   }
 }
