@@ -35,5 +35,14 @@
   "meetPeople": {
     "header": "Meet new friends",
     "description": "You can find travelers from more than 100 countries at TravelBuddy."
+  },
+  "howItWorks": {
+    "header": "How it works?",
+    "search": "SEARCH",
+    "create": "CREATE",
+    "meet": "MEET",
+    "search-info": "Find Your Dream Tirp",
+    "create-info": "Create Your Own Trip",
+    "meet-info": "Meet New Friends"
   }
 }

@@ -27,7 +27,7 @@ export const StyledHowItWorks = styled.div`
         justify-items: center;
 
         h2 {
-          font-size: 1.9rem;
+          font-size: 2.1rem;
           padding: 0;
           margin: 0;
         }
@@ -50,9 +50,9 @@ export const StyledHowItWorks = styled.div`
         align-items: center;
 
         .graphic {
-          background: linear-gradient(135deg, #074a7a, #4db8d3);
-          width: 70px;
-          height: 70px;
+          background: linear-gradient(90deg, #004475, #75d5ee);
+          width: 100px;
+          height: 100px;
           border-radius: 50%;
           display: flex;
           justify-content: center;
@@ -61,7 +61,7 @@ export const StyledHowItWorks = styled.div`
 
           i {
             color: white;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
           }
         }
 
@@ -71,6 +71,7 @@ export const StyledHowItWorks = styled.div`
           h4 {
             padding: 0;
             margin: 0;
+            font-size: 1.4rem;
           }
 
           p {
