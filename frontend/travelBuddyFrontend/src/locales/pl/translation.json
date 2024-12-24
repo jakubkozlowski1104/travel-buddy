@@ -44,5 +44,12 @@
     "search-info": "Znajdź wymarzoną podróż",
     "create-info": "Stwórz własną podróż",
     "meet-info": "Poznaj nowych znajomych"
+  },
+  "startPage": {
+    "header": "ZNAJDŹ TOWARZYSZA PODRÓŻY",
+    "description1": "Wybierasz się w podróż? Poznaj osoby, które uwielbiają podróżować.",
+    "description2": "Podziel się swoimi przygodami z towarzyszem podróży.",
+    "search": "Wyszukaj cel podróży",
+    "button": "SZUKAJ"
   }
 }

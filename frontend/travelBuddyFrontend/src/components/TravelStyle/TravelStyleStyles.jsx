@@ -9,6 +9,7 @@ export const StyledTravelStyles = styled.div`
   flex-direction: column;
   overflow: hidden;
   margin-bottom: 10px;
+  margin-top: -50px;
 
   .center {
     display: flex;

@@ -12,6 +12,9 @@ const palette = {
     light: '#90e0ef',
     dark: '#0077b6',
   },
+  own: {
+    main: '#21e8bc',
+  },
   background: {
     default: '#f0f0f0',
   },
