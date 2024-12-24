@@ -9,7 +9,10 @@ import Footer from '../components/Footer/Footer';
 import { Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+
 const MainPage = () => {
+  const { t } = useTranslation();
   return (
     <StyledContainer>
       <section className="start" id="start">
@@ -17,19 +20,18 @@ const MainPage = () => {
         <div className="overlay"></div>
         <div className="center">
           <div className="info">
-            <div className="slogan">FIND A TRAVEL BUDDY</div>
+            <div className="slogan">{t('startPage.header')}</div>
             <div className="description">
-              Going on a trip? Meet people who love to travel. <br /> Share your
-              adventures with a travel companion.
+              {t('startPage.description1')} <br /> {t('startPage.description2')}
             </div>
             <form action="">
               <div className="search-bar">
                 <i className="search-icon">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </i>
-                <input type="text" placeholder="Search trip destination" />
+                <input type="text" placeholder={t('startPage.search')} />
                 <Button color="own" variant="contained" className="btn">
-                  SEARCH
+                  {t('startPage.button')}
                 </Button>
               </div>
             </form>

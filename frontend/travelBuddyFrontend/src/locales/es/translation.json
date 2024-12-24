@@ -44,5 +44,12 @@
     "search-info": "Encuentra tu viaje soñado",
     "create-info": "Crea tu propio viaje",
     "meet-info": "Conoce nuevos amigos"
+  },
+  "startPage": {
+    "header": "ENCUENTRA UN COMPAÑERO DE VIAJE",
+    "description1": "¿Te vas de viaje? Conoce personas que aman viajar.",
+    "description2": "¿Comparte tus aventuras con un compañero de viaje.",
+    "search": "Buscar destino de viaje",
+    "button": "BUSCAR"
   }
 }

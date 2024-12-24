@@ -59,7 +59,7 @@ export const StyledContainer = styled.div`
         gap: 0px;
 
         .slogan {
-          font-size: 4rem;
+          font-size: 3.5rem;
           font-weight: bold;
         }
 
