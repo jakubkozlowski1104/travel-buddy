@@ -10,14 +10,13 @@ const TravelStyle = () => {
   const containerRef = useRef(null);
   const customOrder = [6, 5, 4, 1, 2, 8, 3];
   const { language } = useLanguage();
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchTravelStyles = async () => {
       try {
         const response = await fetch('http://localhost:8080/travel-types');
         const data = await response.json();
-        console.log(response.data);
         setTravelStyles(data);
       } catch (error) {
         console.error('Error fetching travel styles:', error);
@@ -26,10 +25,6 @@ const TravelStyle = () => {
 
     fetchTravelStyles();
   }, []);
-
-  useEffect(() => {
-    console.log(`Current language: ${language}`);
-  }, [language]);
 
   let scrollInterval;
 
