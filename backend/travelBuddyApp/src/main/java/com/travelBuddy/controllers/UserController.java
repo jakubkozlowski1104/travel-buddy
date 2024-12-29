@@ -5,6 +5,7 @@ package com.travelBuddy.controllers;
     import com.travelBuddy.services.UserService;
     import lombok.RequiredArgsConstructor;
     import org.springframework.data.domain.Page;
+    import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
     import org.springframework.web.multipart.MultipartFile;
@@ -13,9 +14,12 @@ package com.travelBuddy.controllers;
     import java.net.URI;
     import java.nio.file.Files;
     import java.nio.file.Paths;
+    import java.util.HashMap;
     import java.util.List;
+    import java.util.Map;
+    import java.util.Optional;
 
-import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
+    import static com.travelBuddy.constants.Constant.PHOTO_DIRECTORY;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
@@ -43,6 +47,37 @@ public class UserController {
                                                @RequestParam(value = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok().body(userService.getAllUsers(page, size));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
+        String email = loginData.get("email");
+        String password = loginData.get("password");
+        Optional<User> optionalUser = userService.getUserByEmail(email);
+
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "User not found"));
+        }
+
+        User user = optionalUser.get();
+
+        if (!password.equals(user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Invalid password"));
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("user", Map.of(
+                "id", user.getId(),
+                "username", user.getUsername(),
+                "email", user.getEmail()
+        ));
+        response.put("token", user.getUsername());
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable String id) {
