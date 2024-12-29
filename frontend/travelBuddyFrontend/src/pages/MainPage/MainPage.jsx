@@ -1,11 +1,11 @@
 import { StyledContainer } from './MainPageStyles';
-import backgroundImage from '../assets/backgroud-first.jpg';
-import TravelStyle from '../components/TravelStyle/TravelStyle';
-import RecentTrips from '../components/RecentTrips/RecentTrips';
-import StartTripBanner from '../components/StartTripBanner/StartTripBanner';
-import MeetPeople from '../components/MeetPeople/MeetPeople';
-import HowItWorks from '../components/HowItWorks/HowItWorks';
-import Footer from '../components/Footer/Footer';
+import backgroundImage from '../../assets/backgroud-first.jpg';
+import TravelStyle from '../../components/TravelStyle/TravelStyle';
+import RecentTrips from '../../components/RecentTrips/RecentTrips';
+import StartTripBanner from '../../components/StartTripBanner/StartTripBanner';
+import MeetPeople from '../../components/MeetPeople/MeetPeople';
+import HowItWorks from '../../components/HowItWorks/HowItWorks';
+import Footer from '../../components/Footer/Footer';
 import { Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';

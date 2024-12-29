@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyledNav } from './NavigationStyles';
+import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo.png';
@@ -24,9 +25,11 @@ const Navigation = () => {
         <Menu />
 
         <div className="buttons">
-          <Button color="primary" variant="contained">
-            {t('auth.login')}
-          </Button>
+          <NavLink to="/login" style={{ textDecoration: 'none' }}>
+            <Button color="primary" variant="contained">
+              {t('auth.login')}
+            </Button>
+          </NavLink>
           <Button color="primary" variant="contained">
             {t('auth.signup')}
           </Button>
