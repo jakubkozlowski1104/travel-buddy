@@ -11,6 +11,13 @@ const Navigation = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const logoutUser = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('user');
+    window.location.reload();
+  };
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
 
@@ -25,18 +32,40 @@ const Navigation = () => {
         <Menu />
 
         <div className="buttons">
-          <NavLink to="/login" style={{ textDecoration: 'none' }}>
-            <Button color="primary" variant="contained">
-              {t('auth.login')}
-            </Button>
-          </NavLink>
-          <NavLink to="/sign-up" style={{ textDecoration: 'none' }}>
-            <Button color="primary" variant="contained">
-              {t('auth.signup')}
-            </Button>
-          </NavLink>
+          <ul>
+            {localStorage.getItem('token') === null ? (
+              <>
+                <NavLink to="/login" style={{ textDecoration: 'none' }}>
+                  <Button color="primary" variant="contained">
+                    {t('auth.login')}
+                  </Button>
+                </NavLink>
+                <NavLink to="/sign-up" style={{ textDecoration: 'none' }}>
+                  <Button color="primary" variant="contained">
+                    {t('auth.signup')}
+                  </Button>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/" style={{ textDecoration: 'none' }}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={logoutUser}
+                  >
+                    LOGOUT
+                  </Button>
+                </NavLink>
+                <NavLink to="/user-profile" style={{ textDecoration: 'none' }}>
+                  <Button color="primary" variant="contained">
+                    My Profile
+                  </Button>
+                </NavLink>
+              </>
+            )}
+          </ul>
         </div>
-
         <StyledLanguageSelect />
       </nav>
     </StyledNav>

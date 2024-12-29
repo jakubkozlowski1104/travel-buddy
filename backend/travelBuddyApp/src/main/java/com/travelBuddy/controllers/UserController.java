@@ -2,6 +2,7 @@ package com.travelBuddy.controllers;
 
     import com.travelBuddy.DTO.UserDTO;
     import com.travelBuddy.models.User;
+    import com.travelBuddy.repositories.UserRepo;
     import com.travelBuddy.services.UserService;
     import lombok.RequiredArgsConstructor;
     import org.springframework.data.domain.Page;
@@ -28,6 +29,7 @@ import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final UserRepo userRepo;
 
     //works
     @PostMapping
@@ -75,6 +77,33 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
+
+    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Map<String, Object>> canSignUp(@RequestBody User newUser) {
+        boolean emailExists = userRepo.existsByEmail(newUser.getEmail());
+        boolean usernameExists = userRepo.existsByUsername(newUser.getUsername());
+
+        Map<String, Object> response = new HashMap<>();
+        if (emailExists && usernameExists) {
+            response.put("status", 1);
+            response.put("message", "Email and username already exist");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else if (emailExists) {
+            response.put("status", 2);
+            response.put("message", "Email already exists");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else if (usernameExists) {
+            response.put("status", 3);
+            response.put("message", "Username already exists");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            userRepo.save(newUser);
+            response.put("status", 0);
+            response.put("message", "Registration successful");
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+    }
+
 
 
 

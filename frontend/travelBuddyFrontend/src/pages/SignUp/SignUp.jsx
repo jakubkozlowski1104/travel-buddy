@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
   StyledCenter,
@@ -68,25 +67,24 @@ const SignUp = () => {
 
   const createUser = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/user/register/check',
-        {
+      const response = await fetch('http://localhost:8080/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           username: inputs.name,
           email: inputs.email,
           password: inputs.password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+        }),
+      });
 
       if (response.status === 201) {
         console.log('User registered successfully');
         navigate('/');
       } else if (response.status === 200) {
-        checkIfDataAlreadyExist(response.data.status);
+        const data = await response.json();
+        checkIfDataAlreadyExist(data.status);
       }
     } catch (error) {
       console.error('An error occurred:', error);
