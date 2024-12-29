@@ -30,9 +30,11 @@ const Navigation = () => {
               {t('auth.login')}
             </Button>
           </NavLink>
-          <Button color="primary" variant="contained">
-            {t('auth.signup')}
-          </Button>
+          <NavLink to="/sign-up" style={{ textDecoration: 'none' }}>
+            <Button color="primary" variant="contained">
+              {t('auth.signup')}
+            </Button>
+          </NavLink>
         </div>
 
         <StyledLanguageSelect />

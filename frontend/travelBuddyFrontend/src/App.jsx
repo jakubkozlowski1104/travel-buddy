@@ -7,6 +7,7 @@ import '@fontsource/lato/400.css'; // Regular
 import '@fontsource/lato/700.css'; // Bold
 import MainPage from './pages/MainPage/MainPage';
 import LogIn from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
       </Routes>
     </Router>
   );
