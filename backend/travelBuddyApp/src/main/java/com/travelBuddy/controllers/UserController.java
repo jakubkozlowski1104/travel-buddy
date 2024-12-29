@@ -41,7 +41,6 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
-    //works
     @GetMapping
     public ResponseEntity<Page<User>> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
                                                @RequestParam(value = "size", defaultValue = "10") int size) {
