@@ -28,6 +28,8 @@ const Settings = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id || '';
 
+  const [userPhoto, setUserPhoto] = useState('');
+
   const [formData, setFormData] = useState({
     username: '',
     country: '',
@@ -57,6 +59,7 @@ const Settings = () => {
             interests: userData.interests || '',
             bio: userData.bio || '',
           });
+          setUserPhoto(userData.photoUrl || '');
         } else {
           console.error('Failed to fetch user data:', response.statusText);
         }
@@ -122,7 +125,24 @@ const Settings = () => {
       <div className="center">
         <div className="banner">UPDATE YOUR DATA</div>
         <div className="forms">
-          <div className="photo-form">PHOTO</div>
+          <div className="photo-form">
+            <div className="img">
+              {userPhoto ? (
+                <img
+                  src={userPhoto}
+                  alt="User profile"
+                  style={{
+                    width: '150px',
+                    height: '150px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                  }}
+                />
+              ) : (
+                <p>No photo available</p>
+              )}
+            </div>
+          </div>
           <div className="details">
             <form className="form" onSubmit={handleSubmit}>
               <label>
