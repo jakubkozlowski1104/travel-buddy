@@ -20,9 +20,19 @@ export const StyledNav = styled.div`
     transition: 0.3s;
     background: linear-gradient(90deg, #5ca2d3, #75d5ee);
 
-    .logo {
-      transition: 0.3s;
+    .img {
       width: 13%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      overflow: visible;
+
+      .logo {
+        width: 100%;
+        transition: 0.3s;
+        cursor: pointer;
+        clip-path: inset(0 0 40px 0);
+      }
     }
 
     .buttons {
@@ -60,7 +70,7 @@ export const StyledNav = styled.div`
 
     .logo {
       transition: 0.3s;
-      width: 10%;
+      width: 70%;
     }
   }
 `;

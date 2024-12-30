@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyledNav } from './NavigationStyles';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo.png';
@@ -10,11 +10,14 @@ import Menu from './Menu/Menu';
 const Navigation = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation(); // Hook do pobrania aktualnej ścieżki URL
+  const navigate = useNavigate();
 
   const logoutUser = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('user');
+    navigate('/');
     window.location.reload();
   };
 
@@ -25,11 +28,26 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+  const isMainPage = location.pathname === '/';
+
   return (
     <StyledNav>
-      <nav className={isScrolled ? 'scrolled' : ''}>
-        <img src={logo} alt="foto" className="logo" />
-        <Menu />
+      <nav className={isScrolled || !isMainPage ? 'scrolled' : ''}>
+        <div className="img">
+          <img
+            src={logo}
+            alt="foto"
+            className="logo"
+            onClick={handleLogoClick}
+            style={{ cursor: 'pointer' }}
+          />
+        </div>
+
+        {<Menu isMainPage={isMainPage} />}
 
         <div className="buttons">
           <ul>
@@ -60,6 +78,11 @@ const Navigation = () => {
                 <NavLink to="/user-profile" style={{ textDecoration: 'none' }}>
                   <Button color="primary" variant="contained">
                     My Profile
+                  </Button>
+                </NavLink>
+                <NavLink to="/settings" style={{ textDecoration: 'none' }}>
+                  <Button color="primary" variant="contained">
+                    Settings
                   </Button>
                 </NavLink>
               </>
