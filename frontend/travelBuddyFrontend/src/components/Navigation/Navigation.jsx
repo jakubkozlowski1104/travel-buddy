@@ -26,15 +26,13 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Sprawdzenie, czy aktualna strona to "/"
   const isMainPage = location.pathname === '/';
 
   return (
     <StyledNav>
       <nav className={isScrolled || !isMainPage ? 'scrolled' : ''}>
         <img src={logo} alt="foto" className="logo" />
-        {/* Wyświetlaj menu tylko na stronie głównej */}
-        {isMainPage && <Menu />}
+        <Menu isMainPage={isMainPage} />
 
         <div className="buttons">
           <ul>
@@ -62,10 +60,7 @@ const Navigation = () => {
                     LOGOUT
                   </Button>
                 </NavLink>
-                <NavLink
-                  to="/user-profile"
-                  style={{ textDecoration: 'none' }}
-                >
+                <NavLink to="/user-profile" style={{ textDecoration: 'none' }}>
                   <Button color="primary" variant="contained">
                     My Profile
                   </Button>

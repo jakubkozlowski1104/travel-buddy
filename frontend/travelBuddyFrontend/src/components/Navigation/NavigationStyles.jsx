@@ -14,8 +14,7 @@ export const StyledNav = styled.div`
     height: 11vh;
     color: white;
     display: flex;
-    padding: 20px 250px;
-    justify-content: space-between;
+    padding: 20px 200px;
     align-items: center;
     transition: 0.3s;
     background: linear-gradient(90deg, #5ca2d3, #75d5ee);
@@ -64,7 +63,7 @@ export const StyledNav = styled.div`
     }
 
     .menu {
-      display: none; /* Ukryj menu, gdy nawigacja ma klasę scrolled */
+      color: black;
     }
   }
 `;
