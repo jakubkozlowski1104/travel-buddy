@@ -10,6 +10,7 @@ export const StyledSettingsContainer = styled.div`
   margin-bottom: 10px;
   height: 85vh;
   margin-top: 20px;
+  font-family: 'Lato', sans-serif;
 
   .center {
     position: relative;
@@ -47,22 +48,27 @@ export const StyledSettingsContainer = styled.div`
           label {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-weight: bold;
             width: 100%;
 
             input,
-            textarea {
+            textarea,
+            select {
               padding: 8px;
-              border: 1px solid #ccc;
-              border-radius: 5px;
+              border: 1px solid black;
+              width: 50%;
+            }
+
+            span {
+              font-size: 1rem;
             }
 
             select[multiple] {
               height: auto;
               width: 100%;
               padding: 10px;
-              border: 1px solid #ccc;
-              border-radius: 5px;
+              border: 1px solid black;
             }
           }
 
@@ -77,10 +83,6 @@ export const StyledSettingsContainer = styled.div`
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-
-            &:hover {
-              background-color: #0056b3;
-            }
           }
         }
       }

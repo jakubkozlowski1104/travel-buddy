@@ -33,7 +33,7 @@ const Settings = () => {
     country: '',
     city: '',
     age: '',
-    languages: [], // Zmienione na tablicę
+    languages: [],
     relationshipStatus: '',
     interests: '',
     bio: '',
@@ -52,7 +52,7 @@ const Settings = () => {
             country: userData.country || '',
             city: userData.city || '',
             age: userData.age || '',
-            languages: userData.languages || [], // Przechowywane jako tablica
+            languages: userData.languages || [],
             relationshipStatus: userData.relationshipStatus || '',
             interests: userData.interests || '',
             bio: userData.bio || '',
@@ -126,7 +126,7 @@ const Settings = () => {
           <div className="details">
             <form className="form" onSubmit={handleSubmit}>
               <label>
-                Username:
+                <span>Username</span>
                 <input
                   type="text"
                   name="username"
@@ -137,7 +137,7 @@ const Settings = () => {
               </label>
 
               <label>
-                Country:
+                <span>Country</span>
                 <select
                   name="country"
                   value={formData.country}
@@ -154,7 +154,7 @@ const Settings = () => {
                 </select>
               </label>
               <label>
-                City:
+                <span>City</span>
                 <input
                   type="text"
                   name="city"
@@ -165,7 +165,7 @@ const Settings = () => {
               </label>
 
               <label>
-                Age:
+                <span>Age</span>
                 <input
                   type="number"
                   name="age"
@@ -174,39 +174,47 @@ const Settings = () => {
                   placeholder="Enter age"
                 />
               </label>
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="languages-label">Languages</InputLabel>
-                <Select
-                  labelId="languages-label"
-                  id="languages-select"
-                  multiple
-                  value={formData.languages}
-                  onChange={handleLanguagesChange}
-                  input={(
-                    <OutlinedInput
-                      id="select-multiple-languages"
-                      label="Languages"
-                    />
-                  )}
-                  renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                      ))}
-                    </Box>
-                  )}
-                  MenuProps={MenuProps}
-                >
-                  {languages.map((language) => (
-                    <MenuItem key={language} value={language}>
-                      {language}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
 
               <label>
-                Relationship Status:
+                <span>Languages</span>
+                <FormControl sx={{ width: '50%' }}>
+                  <Select
+                    labelId="languages-label"
+                    id="languages-select"
+                    multiple
+                    value={formData.languages}
+                    onChange={handleLanguagesChange}
+                    input={
+                      <OutlinedInput
+                        id="select-multiple-languages"
+                        sx={{
+                          padding: '1px',
+                          border: '1px solid black',
+                          borderRadius: '4px',
+                          backgroundColor: 'white',
+                        }}
+                      />
+                    }
+                    renderValue={(selected) => (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.1 }}>
+                        {selected.map((value) => (
+                          <Chip key={value} label={value} />
+                        ))}
+                      </Box>
+                    )}
+                    MenuProps={MenuProps}
+                  >
+                    {languages.map((language) => (
+                      <MenuItem key={language} value={language}>
+                        {language}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </label>
+
+              <label>
+                <span>Relationship Status</span>
                 <select
                   name="relationshipStatus"
                   value={formData.relationshipStatus}
@@ -224,7 +232,7 @@ const Settings = () => {
               </label>
 
               <label>
-                Interests:
+                <span>Interests</span>
                 <input
                   type="text"
                   name="interests"
@@ -235,7 +243,7 @@ const Settings = () => {
               </label>
 
               <label>
-                Bio:
+                <span>Bio</span>
                 <textarea
                   name="bio"
                   value={formData.bio}
