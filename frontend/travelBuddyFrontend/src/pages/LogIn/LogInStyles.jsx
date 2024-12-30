@@ -6,11 +6,11 @@ export const StyledCenter = styled.div`
   justify-content: center;
   padding-top: 150px;
   width: 84%;
-  height: 100vh;
+  height: 80vh;
   padding-left: 500px;
 
   .wrapper {
-    margin-right: 200px;
+    margin-right: 150px;
     position: relative;
     width: 70%;
     display: flex;
@@ -50,13 +50,13 @@ export const StyledLogin = styled.div`
     }};
 
     input {
+      position: absolute;
       padding: 0px 0px 0px 8px;
       background-color: #343334;
       width: 85%;
       height: 100%;
       outline: none;
       border: none;
-      background-color: #343334;
       color: white;
     }
     input:-webkit-autofill {

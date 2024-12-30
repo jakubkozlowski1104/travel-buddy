@@ -103,7 +103,7 @@ const LogIn = () => {
             <div className="register">
               <p>
                 Dont have an accont?
-                <span onClick={() => navigate('/signup')}> Register</span>
+                <span onClick={() => navigate('/sign-up')}> Register</span>
               </p>
             </div>
           </StyledForm>

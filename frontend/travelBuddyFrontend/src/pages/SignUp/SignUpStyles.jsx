@@ -6,7 +6,7 @@ export const StyledCenter = styled.div`
   justify-content: center;
   padding-top: 150px;
   width: 84%;
-  height: 100vh;
+  height: 80vh;
   padding-left: 500px;
 
   .wrapper {

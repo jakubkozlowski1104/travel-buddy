@@ -12,6 +12,7 @@ export const StyledInputField = styled.div.attrs((props) => ({
   margin: 8px 0;
 
   input {
+    position: absolute;
     padding: 0px 0px 0px 8px;
     background-color: #343334;
     width: 85%;
