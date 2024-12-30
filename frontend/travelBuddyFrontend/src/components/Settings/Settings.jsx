@@ -29,6 +29,7 @@ const Settings = () => {
   const userId = storedUser?.id || '';
 
   const [userPhoto, setUserPhoto] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const [formData, setFormData] = useState({
     username: '',
@@ -72,6 +73,39 @@ const Settings = () => {
 
     fetchUserData();
   }, [userId]);
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handlePhotoUpload = async () => {
+    if (!selectedFile) {
+      alert('Please select a file first.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('id', userId);
+
+    try {
+      const response = await fetch('http://localhost:8080/users/photo', {
+        method: 'PUT',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const photoUrl = await response.text();
+        setUserPhoto(photoUrl);
+        window.location.reload();
+        alert('Photo uploaded successfully.');
+      } else {
+        alert('Failed to upload photo.');
+      }
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+    }
+  };
 
   const handleLanguagesChange = (event) => {
     const {
@@ -142,6 +176,25 @@ const Settings = () => {
                 <p>No photo available</p>
               )}
             </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ margin: '10px 0' }}
+            />
+            <button
+              onClick={handlePhotoUpload}
+              style={{
+                padding: '10px',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+              }}
+            >
+              UPLOAD PHOTO
+            </button>
           </div>
           <div className="details">
             <form className="form" onSubmit={handleSubmit}>
