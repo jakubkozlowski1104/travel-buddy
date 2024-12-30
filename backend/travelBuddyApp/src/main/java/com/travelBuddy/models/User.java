@@ -38,7 +38,12 @@ public class User {
     private String photoUrl;
     private String interests;
     private int age;
+    private String city;
     private String country;
+    private String relationshipStatus;
+
+    @ElementCollection(fetch = FetchType.EAGER) // Przechowywanie listy jako JSON
+    private List<String> languages; // Dodano pole
 
     @CreationTimestamp
     private LocalDateTime createdAt;

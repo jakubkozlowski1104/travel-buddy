@@ -10,13 +10,12 @@ import Menu from './Menu/Menu';
 const Navigation = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const logoutUser = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('user');
+    navigate('/');
     window.location.reload();
   };
 
@@ -27,23 +26,11 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isMainPage = location.pathname === '/';
-
-  const handleLogoClick = () => {
-    navigate('/');
-  };
-
   return (
     <StyledNav>
-      <nav className={isScrolled || !isMainPage ? 'scrolled' : ''}>
-        <img
-          src={logo}
-          alt="foto"
-          className="logo"
-          onClick={handleLogoClick}
-          style={{ cursor: 'pointer' }}
-        />
-        <Menu isMainPage={isMainPage} />
+      <nav className={isScrolled ? 'scrolled' : ''}>
+        <img src={logo} alt="foto" className="logo" />
+        <Menu />
 
         <div className="buttons">
           <ul>
@@ -74,6 +61,11 @@ const Navigation = () => {
                 <NavLink to="/user-profile" style={{ textDecoration: 'none' }}>
                   <Button color="primary" variant="contained">
                     My Profile
+                  </Button>
+                </NavLink>
+                <NavLink to="/settings" style={{ textDecoration: 'none' }}>
+                  <Button color="primary" variant="contained">
+                    Settings
                   </Button>
                 </NavLink>
               </>

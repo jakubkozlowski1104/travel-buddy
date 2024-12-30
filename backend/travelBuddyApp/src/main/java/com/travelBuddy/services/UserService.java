@@ -48,6 +48,48 @@ public class UserService {
         return user.getPassword().equals(password);
     }
 
+    public User updateUser(String id, User updatedUser) {
+        User existingUser = getUserById(id);
+
+        // Aktualizacja pól
+        if (updatedUser.getUsername() != null) {
+            existingUser.setUsername(updatedUser.getUsername());
+        }
+        if (updatedUser.getEmail() != null) {
+            existingUser.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getPassword() != null) {
+            existingUser.setPassword(updatedUser.getPassword());
+        }
+        if (updatedUser.getBio() != null) {
+            existingUser.setBio(updatedUser.getBio());
+        }
+        if (updatedUser.getPhotoUrl() != null) {
+            existingUser.setPhotoUrl(updatedUser.getPhotoUrl());
+        }
+        if (updatedUser.getInterests() != null) {
+            existingUser.setInterests(updatedUser.getInterests());
+        }
+        if (updatedUser.getAge() != 0) {
+            existingUser.setAge(updatedUser.getAge());
+        }
+        if (updatedUser.getCountry() != null) {
+            existingUser.setCountry(updatedUser.getCountry());
+        }
+        if (updatedUser.getCity() != null) {
+            existingUser.setCity(updatedUser.getCity());
+        }
+        if (updatedUser.getRelationshipStatus() != null) {
+            existingUser.setRelationshipStatus(updatedUser.getRelationshipStatus());
+        }
+        if (updatedUser.getLanguages() != null && !updatedUser.getLanguages().isEmpty()) {
+            existingUser.setLanguages(updatedUser.getLanguages());
+        }
+
+        return userRepo.save(existingUser);
+    }
+
+
 
     public User createUser(User user) {
         return userRepo.save(user);
@@ -99,11 +141,15 @@ public class UserService {
                 user.getPhotoUrl(),
                 user.getInterests(),
                 user.getAge(),
+                user.getCity(), // Uwzględniono nowe pole
                 user.getCountry(),
+                user.getRelationshipStatus(), // Uwzględniono nowe pole
+                user.getLanguages(), // Dodano obsługę languages
                 user.getCreatedAt(),
                 countriesVisited
         );
     }
+
 
 
     public List<UserDTO> getAllUsersAsDTO(int page, int size) {
