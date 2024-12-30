@@ -9,6 +9,7 @@ import MainPage from './pages/MainPage/MainPage';
 import LogIn from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import UserProfile from './pages/UserProfile/UserProfile';
+import Settings from './components/Settings/Settings';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );

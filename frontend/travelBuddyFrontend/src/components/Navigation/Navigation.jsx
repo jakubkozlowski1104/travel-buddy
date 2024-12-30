@@ -17,6 +17,7 @@ const Navigation = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('user');
+    navigate('/');
     window.location.reload();
   };
 
@@ -77,6 +78,11 @@ const Navigation = () => {
                 <NavLink to="/user-profile" style={{ textDecoration: 'none' }}>
                   <Button color="primary" variant="contained">
                     My Profile
+                  </Button>
+                </NavLink>
+                <NavLink to="/settings" style={{ textDecoration: 'none' }}>
+                  <Button color="primary" variant="contained">
+                    Settings
                   </Button>
                 </NavLink>
               </>
