@@ -74,6 +74,15 @@ const Settings = () => {
     fetchUserData();
   }, [userId]);
 
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    htmlElement.setAttribute('lang', 'en');
+
+    return () => {
+      htmlElement.removeAttribute('lang');
+    };
+  }, []);
+
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -160,44 +169,35 @@ const Settings = () => {
         <div className="banner">UPDATE YOUR DATA</div>
         <div className="forms">
           <div className="photo-form">
+            <div className="h2">Change your profile Picture</div>
             <div className="img">
               {userPhoto ? (
-                <img
-                  src={userPhoto}
-                  alt="User profile"
-                  style={{
-                    width: '150px',
-                    height: '150px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                  }}
-                />
+                <img src={userPhoto} alt="User profile" />
               ) : (
                 <p>No photo available</p>
               )}
             </div>
+            <label htmlFor="file-input" className="btn-chose">
+              {selectedFile ? selectedFile.name : 'Choose File'}
+            </label>
             <input
+              id="file-input"
               type="file"
               accept="image/*"
-              onChange={handleFileChange}
-              style={{ margin: '10px 0' }}
-            />
-            <button
-              onClick={handlePhotoUpload}
-              style={{
-                padding: '10px',
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
+              onChange={(e) => {
+                handleFileChange(e);
+                setSelectedFile(e.target.files[0]);
               }}
-            >
-              UPLOAD PHOTO
+              style={{ display: 'none' }}
+            />
+            <button onClick={handlePhotoUpload} className="btn-photo">
+              SAVE CHANGES
             </button>
           </div>
+
           <div className="details">
             <form className="form" onSubmit={handleSubmit}>
+              <div className="h2">Change your details</div>
               <label>
                 <span>Username</span>
                 <input

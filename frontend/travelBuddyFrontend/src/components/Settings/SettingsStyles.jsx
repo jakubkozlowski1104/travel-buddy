@@ -26,14 +26,59 @@ export const StyledSettingsContainer = styled.div`
     }
 
     .forms {
+      margin-top: 50px;
       height: 100%;
       padding: 10px;
       display: flex;
       justify-content: space-around;
-      gap: 20px;
+      gap: 30px;
 
       .photo-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
         flex: 1;
+
+        .h2 {
+          font-weight: bold;
+        }
+
+        .img {
+          img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+          }
+        }
+
+        .btn-chose {
+          margin-top: 20px;
+          width: 30%;
+          padding: 10px;
+          font-weight: bold;
+          background-color: #f9f9f9;
+          border: 1px solid black;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          font-size: 0.8rem;
+        }
+
+        input {
+        }
+
+        .btn-photo {
+          margin-top: 20px;
+          width: 50%;
+          padding: 10px;
+          font-weight: bold;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
       }
       .details {
         flex: 1;
@@ -44,6 +89,11 @@ export const StyledSettingsContainer = styled.div`
           align-items: center;
           width: 100%;
           gap: 10px;
+
+          .h2 {
+            font-weight: bold;
+            margin-bottom: 8px;
+          }
 
           label {
             display: flex;
