@@ -40,6 +40,15 @@ public class UserService {
         return userRepo.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
     }
 
+    public Optional<User> getUserByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+    public boolean checkPassword(User user, String password) {
+        return user.getPassword().equals(password);
+    }
+
+
     public User createUser(User user) {
         return userRepo.save(user);
     }
@@ -75,7 +84,7 @@ public class UserService {
         }
     };
 
-    private UserDTO convertToUserDTO(User user) {
+    public UserDTO convertToUserDTO(User user) {
         List<String> countriesVisited = user.getCountriesVisited()
                 .stream()
                 .map(visit -> visit.getCountry().getName())
