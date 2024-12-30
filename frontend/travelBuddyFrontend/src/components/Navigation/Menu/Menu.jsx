@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyledMenu } from './MenuStyled';
 
-const Menu = ({}) => {
+const Menu = ({ isMainPage }) => {
   const [activeItem, setActiveItem] = useState('start');
   const { t } = useTranslation();
 
@@ -25,7 +25,7 @@ const Menu = ({}) => {
   };
 
   return (
-    <StyledMenu>
+    <StyledMenu isMainPage={isMainPage}>
       {menuItems.map((item) => (
         <li
           key={item.name}

@@ -27,5 +27,6 @@ export const StyledMenu = styled.div`
     border-radius: 50px;
     padding: 10px 5px;
     white-space: nowrap;
+    ${({ isMainPage }) => !isMainPage && 'display: none;'}
   }
 `;
