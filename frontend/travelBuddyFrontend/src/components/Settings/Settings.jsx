@@ -1,5 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { StyledSettingsContainer } from './SettingsStyles';
+import countries from './countries';
+import languages from './languages';
+import relationship from './relationship';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  OutlinedInput,
+  Box,
+  Chip,
+} from '@mui/material';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const Settings = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -10,7 +33,7 @@ const Settings = () => {
     country: '',
     city: '',
     age: '',
-    languages: '',
+    languages: [], // Zmienione na tablicę
     relationshipStatus: '',
     interests: '',
     bio: '',
@@ -24,13 +47,12 @@ const Settings = () => {
         const response = await fetch(`http://localhost:8080/users/${userId}`);
         if (response.ok) {
           const userData = await response.json();
-          console.log('pobieranie usera', userData);
           setFormData({
             username: userData.username || '',
             country: userData.country || '',
             city: userData.city || '',
             age: userData.age || '',
-            languages: userData.languages?.join(', ') || '',
+            languages: userData.languages || [], // Przechowywane jako tablica
             relationshipStatus: userData.relationshipStatus || '',
             interests: userData.interests || '',
             bio: userData.bio || '',
@@ -47,6 +69,16 @@ const Settings = () => {
 
     fetchUserData();
   }, [userId]);
+
+  const handleLanguagesChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFormData({
+      ...formData,
+      languages: typeof value === 'string' ? value.split(',') : value,
+    });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,10 +97,7 @@ const Settings = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          languages: formData.languages.split(',').map((lang) => lang.trim()),
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -109,15 +138,21 @@ const Settings = () => {
 
               <label>
                 Country:
-                <input
-                  type="text"
+                <select
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  placeholder="Enter country"
-                />
+                >
+                  <option value="" disabled>
+                    Select a country
+                  </option>
+                  {countries.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
               </label>
-
               <label>
                 City:
                 <input
@@ -139,27 +174,53 @@ const Settings = () => {
                   placeholder="Enter age"
                 />
               </label>
-
-              <label>
-                Languages (comma-separated):
-                <input
-                  type="text"
-                  name="languages"
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="languages-label">Languages</InputLabel>
+                <Select
+                  labelId="languages-label"
+                  id="languages-select"
+                  multiple
                   value={formData.languages}
-                  onChange={handleChange}
-                  placeholder="Enter languages"
-                />
-              </label>
+                  onChange={handleLanguagesChange}
+                  input={(
+                    <OutlinedInput
+                      id="select-multiple-languages"
+                      label="Languages"
+                    />
+                  )}
+                  renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {languages.map((language) => (
+                    <MenuItem key={language} value={language}>
+                      {language}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
               <label>
                 Relationship Status:
-                <input
-                  type="text"
+                <select
                   name="relationshipStatus"
                   value={formData.relationshipStatus}
                   onChange={handleChange}
-                  placeholder="Enter relationship status"
-                />
+                >
+                  <option value="" disabled>
+                    Select a relationship status
+                  </option>
+                  {relationship.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
               </label>
 
               <label>
