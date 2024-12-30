@@ -28,6 +28,9 @@ const Settings = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id || '';
 
+  const [userPhoto, setUserPhoto] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const [formData, setFormData] = useState({
     username: '',
     country: '',
@@ -57,6 +60,7 @@ const Settings = () => {
             interests: userData.interests || '',
             bio: userData.bio || '',
           });
+          setUserPhoto(userData.photoUrl || '');
         } else {
           console.error('Failed to fetch user data:', response.statusText);
         }
@@ -69,6 +73,48 @@ const Settings = () => {
 
     fetchUserData();
   }, [userId]);
+
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    htmlElement.setAttribute('lang', 'en');
+
+    return () => {
+      htmlElement.removeAttribute('lang');
+    };
+  }, []);
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handlePhotoUpload = async () => {
+    if (!selectedFile) {
+      alert('Please select a file first.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('id', userId);
+
+    try {
+      const response = await fetch('http://localhost:8080/users/photo', {
+        method: 'PUT',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const photoUrl = await response.text();
+        setUserPhoto(photoUrl);
+        window.location.reload();
+        alert('Photo uploaded successfully.');
+      } else {
+        alert('Failed to upload photo.');
+      }
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+    }
+  };
 
   const handleLanguagesChange = (event) => {
     const {
@@ -122,9 +168,36 @@ const Settings = () => {
       <div className="center">
         <div className="banner">UPDATE YOUR DATA</div>
         <div className="forms">
-          <div className="photo-form">PHOTO</div>
+          <div className="photo-form">
+            <div className="h2">Change your profile Picture</div>
+            <div className="img">
+              {userPhoto ? (
+                <img src={userPhoto} alt="User profile" />
+              ) : (
+                <p>No photo available</p>
+              )}
+            </div>
+            <label htmlFor="file-input" className="btn-chose">
+              {selectedFile ? selectedFile.name : 'Choose File'}
+            </label>
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                handleFileChange(e);
+                setSelectedFile(e.target.files[0]);
+              }}
+              style={{ display: 'none' }}
+            />
+            <button onClick={handlePhotoUpload} className="btn-photo">
+              SAVE CHANGES
+            </button>
+          </div>
+
           <div className="details">
             <form className="form" onSubmit={handleSubmit}>
+              <div className="h2">Change your details</div>
               <label>
                 <span>Username</span>
                 <input
