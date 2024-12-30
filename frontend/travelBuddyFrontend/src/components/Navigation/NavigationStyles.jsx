@@ -19,6 +19,7 @@ export const StyledNav = styled.div`
     align-items: center;
     transition: 0.3s;
     background: linear-gradient(90deg, #5ca2d3, #75d5ee);
+    overflow: hidden;
 
     .logo {
       transition: 0.3s;
