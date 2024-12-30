@@ -62,5 +62,9 @@ export const StyledNav = styled.div`
       transition: 0.3s;
       width: 10%;
     }
+
+    .menu {
+      display: none; /* Ukryj menu, gdy nawigacja ma klasę scrolled */
+    }
   }
 `;
