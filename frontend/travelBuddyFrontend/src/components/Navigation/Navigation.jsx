@@ -10,7 +10,7 @@ import Menu from './Menu/Menu';
 const Navigation = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
+  const location = useLocation(); // Hook do pobrania aktualnej ścieżki URL
   const navigate = useNavigate();
 
   const logoutUser = () => {
@@ -31,11 +31,13 @@ const Navigation = () => {
     navigate('/');
   };
 
+  // Zmienna sprawdzająca, czy użytkownik jest na stronie głównej
   const isMainPage = location.pathname === '/';
 
   return (
     <StyledNav>
-      <nav className={isScrolled ? 'scrolled' : ''}>
+      {/* Dodajemy klasę .scrolled, jeśli nie jesteśmy na stronie głównej */}
+      <nav className={isScrolled || !isMainPage ? 'scrolled' : ''}>
         <img
           src={logo}
           alt="foto"
