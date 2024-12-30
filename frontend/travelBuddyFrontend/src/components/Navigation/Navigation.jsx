@@ -10,6 +10,8 @@ import Menu from './Menu/Menu';
 const Navigation = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const logoutUser = () => {
     localStorage.removeItem('token');
@@ -26,11 +28,25 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+  const isMainPage = location.pathname === '/';
+
   return (
     <StyledNav>
-      <nav className={isScrolled ? 'scrolled' : ''}>
-        <img src={logo} alt="foto" className="logo" />
-        <Menu />
+      <nav className={isScrolled || !isMainPage ? 'scrolled' : ''}>
+        <div className="img">
+          <img
+            src={logo}
+            alt="foto"
+            className="logo"
+            onClick={handleLogoClick}
+            style={{ cursor: 'pointer' }}
+          />
+        </div>
+        {<Menu isMainPage={isMainPage} />}
 
         <div className="buttons">
           <ul>
