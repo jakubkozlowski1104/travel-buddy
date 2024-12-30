@@ -14,6 +14,12 @@ public class TripRequestDTO {
     private LocalDate endDate;
     private String description;
     private String lookingFor;
+    private String meetingBefore;
+    private String itinerary;
+    private String wantToDo;
+    private String wantToSee;
+    private String ownerId;
+    private List<String> languages;
     private List<Long> travelTypeIds;
     private List<Long> countries;
 }

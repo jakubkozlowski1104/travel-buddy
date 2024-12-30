@@ -95,6 +95,12 @@ public class TripController {
         trip.setEndDate(tripRequestDTO.getEndDate());
         trip.setDescription(tripRequestDTO.getDescription());
         trip.setLookingFor(tripRequestDTO.getLookingFor());
+        trip.setLanguages(tripRequestDTO.getLanguages());
+        trip.setMeetingBefore(tripRequestDTO.getMeetingBefore());
+        trip.setItinerary(tripRequestDTO.getItinerary());
+        trip.setWantToDo(tripRequestDTO.getWantToDo());
+        trip.setWantToSee(tripRequestDTO.getWantToSee());
+        trip.setOwnerId(tripRequestDTO.getOwnerId());
 
         // Mapowanie TravelTypes
         if (tripRequestDTO.getTravelTypeIds() != null) {
@@ -133,6 +139,13 @@ public class TripController {
         responseDTO.setEndDate(trip.getEndDate());
         responseDTO.setDescription(trip.getDescription());
         responseDTO.setLookingFor(trip.getLookingFor());
+
+        responseDTO.setMeetingBefore(trip.getMeetingBefore());
+        responseDTO.setItinerary(trip.getItinerary());
+        responseDTO.setWantToDo(trip.getWantToDo());
+        responseDTO.setWantToSee(trip.getWantToSee());
+        responseDTO.setOwnerId(trip.getOwnerId());
+        responseDTO.setLanguages(trip.getLanguages());
 
         responseDTO.setTravelTypes(trip.getTravelTypes());
         responseDTO.setCountries(trip.getCountries());

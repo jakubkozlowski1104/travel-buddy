@@ -73,6 +73,24 @@ public class Trip {
     @Column(name = "looking_for", nullable = true)
     private String lookingFor;
 
+    @Column(name = "meeting_before")
+    private String meetingBefore;
+
+    @Column(name = "itinerary")
+    private String itinerary;
+
+    @Column(name = "want_to_do")
+    private String wantToDo;
+
+    @Column(name = "want_to_see")
+    private String wantToSee;
+
+    @Column(name = "owner_id")
+    private String ownerId;
+
+    @ElementCollection(fetch = FetchType.EAGER) // Przechowywanie listy jako JSON
+    private List<String> languages; // Dodano pole
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "trip_users",
