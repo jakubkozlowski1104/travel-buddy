@@ -32,20 +32,20 @@ const Navigation = () => {
     navigate('/');
   };
 
-  // Zmienna sprawdzająca, czy użytkownik jest na stronie głównej
   const isMainPage = location.pathname === '/';
 
   return (
     <StyledNav>
-      {/* Dodajemy klasę .scrolled, jeśli nie jesteśmy na stronie głównej */}
       <nav className={isScrolled || !isMainPage ? 'scrolled' : ''}>
-        <img
-          src={logo}
-          alt="foto"
-          className="logo"
-          onClick={handleLogoClick}
-          style={{ cursor: 'pointer' }}
-        />
+        <div className="img">
+          <img
+            src={logo}
+            alt="foto"
+            className="logo"
+            onClick={handleLogoClick}
+            style={{ cursor: 'pointer' }}
+          />
+        </div>
 
         {<Menu isMainPage={isMainPage} />}
 
