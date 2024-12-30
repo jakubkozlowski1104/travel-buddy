@@ -17,6 +17,8 @@ public class UserDTO {
     private String photoUrl;
     private String interests;
     private int age;
+    private String city;
+    private String relationshipStatus;
     private String country;
     private LocalDateTime createdAt;
     private List<String> countriesVisited;

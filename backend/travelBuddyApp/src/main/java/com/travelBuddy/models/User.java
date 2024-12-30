@@ -39,6 +39,9 @@ public class User {
     private String interests;
     private int age;
     private String country;
+    private String city;
+    private String relationshipStatus;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;
