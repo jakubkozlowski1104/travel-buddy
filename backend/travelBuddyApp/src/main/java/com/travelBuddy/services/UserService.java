@@ -82,6 +82,9 @@ public class UserService {
         if (updatedUser.getRelationshipStatus() != null) {
             existingUser.setRelationshipStatus(updatedUser.getRelationshipStatus());
         }
+        if (updatedUser.getLanguages() != null && !updatedUser.getLanguages().isEmpty()) {
+            existingUser.setLanguages(updatedUser.getLanguages());
+        }
 
         return userRepo.save(existingUser);
     }
@@ -138,9 +141,10 @@ public class UserService {
                 user.getPhotoUrl(),
                 user.getInterests(),
                 user.getAge(),
-                user.getCountry(),
                 user.getCity(), // Uwzględniono nowe pole
+                user.getCountry(),
                 user.getRelationshipStatus(), // Uwzględniono nowe pole
+                user.getLanguages(), // Dodano obsługę languages
                 user.getCreatedAt(),
                 countriesVisited
         );
