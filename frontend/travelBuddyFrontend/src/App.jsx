@@ -10,6 +10,7 @@ import LogIn from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import UserProfile from './pages/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
+import CreateTrip from './components/CreateTrip/CreateTrip';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/create-trip" element={<CreateTrip />} />
       </Routes>
     </Router>
   );

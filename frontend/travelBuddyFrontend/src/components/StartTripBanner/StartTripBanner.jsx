@@ -3,6 +3,7 @@ import { StyledStartContainer } from './StartTripBannerStyles';
 import { Button } from '@mui/material';
 import logo from '../../assets/logo.png';
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 const StartTripBanner = () => {
   const { t } = useTranslation();
@@ -20,9 +21,15 @@ const StartTripBanner = () => {
           <div className="slogan">{t('startTrip.header')}</div>{' '}
           <div className="description">{t('startTrip.description')}</div>
           <div className="bottom">
-            <Button color="secondary" variant="contained" className="btn">
-              {t('startTrip.button')}
-            </Button>
+            <NavLink
+              to="/create-trip"
+              className="link"
+              onClick={() => setActiveItem(item.name)}
+            >
+              <Button color="secondary" variant="contained" className="btn">
+                {t('startTrip.button')}
+              </Button>
+            </NavLink>
             <div className="text">{t('startTrip.note')}</div>{' '}
           </div>
         </div>
