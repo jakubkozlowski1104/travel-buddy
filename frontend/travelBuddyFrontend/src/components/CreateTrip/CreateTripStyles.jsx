@@ -32,7 +32,7 @@ export const StyledCreateTripContainer = styled.div`
       align-items: center;
 
       .submitButton {
-        margin-top: 20px;
+        margin-top: 8px;
         width: 100%;
         padding: 10px;
         font-weight: bold;

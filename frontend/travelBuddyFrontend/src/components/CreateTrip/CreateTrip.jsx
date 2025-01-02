@@ -9,6 +9,7 @@ import {
   Box,
   Chip,
 } from '@mui/material';
+import languagesList from './languagesList';
 
 const CreateTrip = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const CreateTrip = () => {
     endDate: '',
     countries: [],
     travelType: [],
-    language: '',
+    languages: [],
     itinerary: '',
     description: '',
     wantToSee: '',
@@ -41,6 +42,7 @@ const CreateTrip = () => {
 
   const [travelTypes, setTravelTypes] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id || '';
 
@@ -127,6 +129,16 @@ const CreateTrip = () => {
     });
   };
 
+  const handleLanguagesChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFormData({
+      ...formData,
+      languages: typeof value === 'string' ? value.split(',') : value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -135,7 +147,7 @@ const CreateTrip = () => {
       ownerId: userId,
       countries: formData.countries,
       travelTypeIds: formData.travelType,
-      languages: formData.language
+      language: formData.language
         ? formData.language.split(',').map((lang) => lang.trim())
         : [],
     };
@@ -341,14 +353,60 @@ const CreateTrip = () => {
               onChange={handleInputChange}
             />
 
-            <input
-              type="text"
-              name="language"
-              className="language"
-              placeholder="Language"
-              value={formData.language}
-              onChange={handleInputChange}
-            />
+            <label>
+              <FormControl sx={{ width: '100%' }}>
+                <Select
+                  labelId="languages-label"
+                  id="languages-select"
+                  multiple
+                  value={formData.languages}
+                  onChange={handleLanguagesChange}
+                  displayEmpty
+                  input={
+                    <OutlinedInput
+                      id="select-multiple-languages"
+                      sx={{
+                        padding: '1px',
+                        border: '1px solid black',
+                        borderRadius: '4px',
+                        backgroundColor: 'white',
+                      }}
+                    />
+                  }
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return (
+                        <span style={{ color: 'gray', fontSize: '1.2rem' }}>
+                          Select languages
+                        </span>
+                      );
+                    }
+                    return (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.1 }}>
+                        {selected.map((value) => (
+                          <Chip
+                            key={value}
+                            label={
+                              languages.find(
+                                (language) => language.id === value
+                              )?.name || value
+                            }
+                          />
+                        ))}
+                      </Box>
+                    );
+                  }}
+                  MenuProps={MenuProps}
+                >
+                  {languagesList.map((language) => (
+                    <MenuItem key={language} value={language}>
+                      {language}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </label>
+
             <input
               type="text"
               name="itinerary"
