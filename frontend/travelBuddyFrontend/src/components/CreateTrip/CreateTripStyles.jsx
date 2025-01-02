@@ -111,6 +111,12 @@ export const StyledCreateTripContainer = styled.div`
         .itinerary {
           grid-column: 3;
         }
+        select.itinerary-placeholder {
+          color: gray;
+        }
+        select {
+          color: black;
+        }
 
         .description {
           grid-column: span 3;

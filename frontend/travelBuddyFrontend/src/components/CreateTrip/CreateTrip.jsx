@@ -85,22 +85,30 @@ const CreateTrip = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Walidacja dat
-    if (name === 'startDate') {
-      // Start date nie może być wcześniejsze niż dzisiaj
+    if (name === 'startDate' || name === 'endDate') {
       const today = new Date().toISOString().split('T')[0];
-      if (value < today) {
+      if (name === 'startDate' && value < today) {
         alert('Start date cannot be earlier than today.');
         return;
       }
-    }
-
-    if (name === 'endDate') {
-      // End date nie może być wcześniejsze niż start date
-      if (formData.startDate && value < formData.startDate) {
+      if (
+        name === 'endDate' &&
+        formData.startDate &&
+        value < formData.startDate
+      ) {
         alert('End date cannot be earlier than start date.');
         return;
       }
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+        daysOfTravel: calculateDaysOfTravel(
+          name === 'startDate' ? value : prevFormData.startDate,
+          name === 'endDate' ? value : prevFormData.endDate
+        ),
+      }));
+      return;
     }
 
     setFormData({
@@ -177,6 +185,13 @@ const CreateTrip = () => {
       console.error('Error creating trip:', error);
       alert('Failed to create trip.');
     }
+  };
+
+  const calculateDaysOfTravel = (startDate, endDate) => {
+    if (!startDate || !endDate) return 0;
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    return Math.ceil((end - start) / (1000 * 60 * 60 * 24));
   };
 
   return (
@@ -414,14 +429,22 @@ const CreateTrip = () => {
               </FormControl>
             </label>
 
-            <input
-              type="text"
+            <select
               name="itinerary"
-              className="itinerary"
-              placeholder="Itinerary"
+              className={`itinerary ${
+                formData.itinerary === '' ? 'itinerary-placeholder' : ''
+              }`}
               value={formData.itinerary}
               onChange={handleInputChange}
-            />
+            >
+              <option value="" disabled>
+                Select itinerary type
+              </option>
+              <option value="flexible">Flexible</option>
+              <option value="fixed">Fixed</option>
+              <option value="none">None</option>
+            </select>
+
             <textarea
               name="description"
               className="description"
