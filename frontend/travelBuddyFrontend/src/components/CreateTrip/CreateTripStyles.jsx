@@ -86,6 +86,19 @@ export const StyledCreateTripContainer = styled.div`
           grid-column: 3;
         }
 
+        .meetingBefore {
+          grid-column: 3;
+          font-size: 1rem;
+        }
+
+        select.meetingBefore {
+          color: black;
+        }
+
+        select.meetingBefore-placeholder {
+          color: gray;
+        }
+
         .countries {
           grid-column: span 2;
           background-color: red;

@@ -315,7 +315,7 @@ const CreateTrip = () => {
                     if (selected.length === 0) {
                       return (
                         <span style={{ color: 'gray', fontSize: '1.2rem' }}>
-                          Select countries
+                          Select destinations
                         </span>
                       );
                     }
@@ -344,17 +344,24 @@ const CreateTrip = () => {
               </FormControl>
             </label>
 
-            <input
-              type="text"
+            <select
               name="meetingBefore"
-              className="meetingBefore"
-              placeholder="Meeting before"
+              className={`meetingBefore ${
+                formData.meetingBefore === '' ? 'meetingBefore-placeholder' : ''
+              }`}
               value={formData.meetingBefore}
               onChange={handleInputChange}
-            />
+            >
+              <option value="" disabled>
+                Select meeting preference
+              </option>
+              <option value="No">No</option>
+              <option value="Online">Online</option>
+              <option value="In person">In person</option>
+            </select>
 
             <label>
-              <FormControl sx={{ width: '100%' }}>
+              <FormControl sx={{ width: '202.5%' }}>
                 <Select
                   labelId="languages-label"
                   id="languages-select"
