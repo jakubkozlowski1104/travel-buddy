@@ -16,7 +16,8 @@ const CreateTrip = () => {
     tripName: '',
     destination: '',
     lookingFor: '',
-    budget: '',
+    estimatedCost: '',
+
     meetingBefore: '',
     startDate: '',
     endDate: '',
@@ -85,7 +86,11 @@ const CreateTrip = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'startDate' || name === 'endDate') {
+    if (
+      name === 'startDate' ||
+      name === 'endDate' ||
+      name === 'estimatedCost'
+    ) {
       const today = new Date().toISOString().split('T')[0];
       if (name === 'startDate' && value < today) {
         alert('Start date cannot be earlier than today.');
@@ -97,6 +102,10 @@ const CreateTrip = () => {
         value < formData.startDate
       ) {
         alert('End date cannot be earlier than start date.');
+        return;
+      }
+      if (name === 'estimatedCost' && isNaN(value)) {
+        alert('Estimated cost must be a number.');
         return;
       }
 
@@ -155,6 +164,7 @@ const CreateTrip = () => {
       ownerId: userId,
       countries: formData.countries,
       travelTypeIds: formData.travelType,
+      estimatedCost: formData.estimatedCost || 0,
       language: formData.language
         ? formData.language.split(',').map((lang) => lang.trim())
         : [],
@@ -227,10 +237,10 @@ const CreateTrip = () => {
             </select>
             <input
               type="text"
-              name="budget"
+              name="estimatedCost"
               className="budget"
-              placeholder="Budget"
-              value={formData.budget}
+              placeholder="Estimated Cost"
+              value={formData.estimatedCost}
               onChange={handleInputChange}
             />
 
