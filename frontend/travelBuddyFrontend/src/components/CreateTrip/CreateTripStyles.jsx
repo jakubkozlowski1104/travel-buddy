@@ -57,6 +57,14 @@ export const StyledCreateTripContainer = styled.div`
 
         .lookingFor {
           grid-column: 1;
+          font-size: 1rem;
+        }
+
+        select.lookingFor-placeholder {
+          color: gray;
+        }
+        select {
+          color: black;
         }
 
         .budget {

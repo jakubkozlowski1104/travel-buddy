@@ -91,19 +91,28 @@ const CreateTrip = () => {
               onChange={handleInputChange}
             />
 
-            <input
-              type="text"
+            <select
               name="lookingFor"
-              className="lookingFor"
-              placeholder="Looking for"
+              className={`lookingFor ${
+                formData.lookingFor === '' ? 'lookingFor-placeholder' : ''
+              }`}
               value={formData.lookingFor}
               onChange={handleInputChange}
-            />
+            >
+              <option value="" disabled>
+                Looking for
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="mixed group">Mixed Group</option>
+              <option value="any">Any</option>
+            </select>
+
             <input
-              type="text"
+              type="number"
               name="budget"
               className="budget"
-              placeholder="Budget"
+              placeholder="Budget in USD"
               value={formData.budget}
               onChange={handleInputChange}
             />
