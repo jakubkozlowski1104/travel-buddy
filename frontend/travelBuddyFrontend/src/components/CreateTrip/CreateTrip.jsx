@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyledCreateTripContainer } from './CreateTripStyles';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  OutlinedInput,
+  Box,
+  Chip,
+} from '@mui/material';
 
 const CreateTrip = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +20,7 @@ const CreateTrip = () => {
     startDate: '',
     endDate: '',
     countries: '',
-    travelType: '',
+    travelType: [],
     language: '',
     itinerary: '',
     description: '',
@@ -19,14 +28,54 @@ const CreateTrip = () => {
     wantToDo: '',
   });
 
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  const [travelTypes, setTravelTypes] = useState([]);
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id || '';
+
+  useEffect(() => {
+    const fetchTravelTypes = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/travel-types');
+        if (response.ok) {
+          const data = await response.json();
+          setTravelTypes(data);
+        } else {
+          console.error('Error fetching travel types:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching travel types:', error);
+      }
+    };
+
+    fetchTravelTypes();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
+    });
+  };
+
+  const handleTravelTypeChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFormData({
+      ...formData,
+      travelType: typeof value === 'string' ? value.split(',') : value,
     });
   };
 
@@ -38,19 +87,15 @@ const CreateTrip = () => {
       ownerId: userId,
       countries: formData.countries
         ? formData.countries.split(',').map((country) => country.trim())
-        : [], // Convert countries to an array of strings or an empty array
-      travelTypeIds: formData.travelType
-        ? formData.travelType
-            .split(',')
-            .map((type) => parseInt(type.trim(), 10))
-        : [], // Convert travelType to an array of numbers or an empty array
+        : [],
+      travelTypeIds: formData.travelType, // Już jako tablica
       languages: formData.language
         ? formData.language.split(',').map((lang) => lang.trim())
-        : [], // Convert languages to an array of strings or an empty array
+        : [],
     };
 
-    delete tripData.travelType; // Remove the original travelType field
-    delete tripData.language; // Remove the original language field
+    delete tripData.travelType;
+    delete tripData.language;
 
     try {
       const response = await fetch('http://localhost:8080/trips', {
@@ -107,23 +152,67 @@ const CreateTrip = () => {
               <option value="mixed group">Mixed Group</option>
               <option value="any">Any</option>
             </select>
-
             <input
-              type="number"
+              type="text"
               name="budget"
               className="budget"
-              placeholder="Budget in USD"
+              placeholder="Budget"
               value={formData.budget}
               onChange={handleInputChange}
             />
-            <input
-              type="text"
-              name="travelType"
-              className="travelType"
-              placeholder="Travel type"
-              value={formData.travelType}
-              onChange={handleInputChange}
-            />
+
+            <label>
+              <FormControl sx={{ width: '100%' }}>
+                <Select
+                  labelId="travel-types-label"
+                  id="travel-types-select"
+                  multiple
+                  value={formData.travelType}
+                  onChange={handleTravelTypeChange}
+                  displayEmpty
+                  input={
+                    <OutlinedInput
+                      id="select-multiple-travel-types"
+                      sx={{
+                        padding: '1px',
+                        border: '1px solid black',
+                        borderRadius: '4px',
+                        backgroundColor: 'white',
+                      }}
+                    />
+                  }
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return (
+                        <span style={{ color: 'gray', fontSize: '1.2rem' }}>
+                          Select travel types
+                        </span>
+                      );
+                    }
+                    return (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.1 }}>
+                        {selected.map((value) => (
+                          <Chip
+                            key={value}
+                            label={
+                              travelTypes.find((type) => type.id === value)
+                                ?.name || value
+                            }
+                          />
+                        ))}
+                      </Box>
+                    );
+                  }}
+                  MenuProps={MenuProps}
+                >
+                  {travelTypes.map((type) => (
+                    <MenuItem key={type.id} value={type.id}>
+                      {type.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </label>
 
             <label htmlFor="">start & end date</label>
             <input
