@@ -19,7 +19,7 @@ const CreateTrip = () => {
     meetingBefore: '',
     startDate: '',
     endDate: '',
-    countries: '',
+    countries: [],
     travelType: [],
     language: '',
     itinerary: '',
@@ -40,6 +40,7 @@ const CreateTrip = () => {
   };
 
   const [travelTypes, setTravelTypes] = useState([]);
+  const [countries, setCountries] = useState([]);
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id || '';
 
@@ -59,6 +60,24 @@ const CreateTrip = () => {
     };
 
     fetchTravelTypes();
+  }, []);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/countries');
+        if (response.ok) {
+          const data = await response.json();
+          setCountries(data);
+        } else {
+          console.error('Error fetching countries:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      }
+    };
+
+    fetchCountries();
   }, []);
 
   const handleInputChange = (e) => {
@@ -98,16 +117,24 @@ const CreateTrip = () => {
     });
   };
 
+  const handleCountriesChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFormData({
+      ...formData,
+      countries: typeof value === 'string' ? value.split(',') : value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const tripData = {
       ...formData,
       ownerId: userId,
-      countries: formData.countries
-        ? formData.countries.split(',').map((country) => country.trim())
-        : [],
-      travelTypeIds: formData.travelType, // Już jako tablica
+      countries: formData.countries,
+      travelTypeIds: formData.travelType,
       languages: formData.language
         ? formData.language.split(',').map((lang) => lang.trim())
         : [],
@@ -252,14 +279,59 @@ const CreateTrip = () => {
               min={formData.startDate || ''}
             />
 
-            <input
-              type="text"
-              name="countries"
-              className="countries"
-              placeholder="Countries"
-              value={formData.countries}
-              onChange={handleInputChange}
-            />
+            <label>
+              <FormControl sx={{ width: '202.5%', gridColumn: 'span 2' }}>
+                <Select
+                  labelId="countries-label"
+                  id="countries-select"
+                  multiple
+                  value={formData.countries}
+                  onChange={handleCountriesChange}
+                  displayEmpty
+                  input={
+                    <OutlinedInput
+                      id="select-multiple-countries"
+                      sx={{
+                        padding: '1px',
+                        border: '1px solid black',
+                        borderRadius: '4px',
+                        backgroundColor: 'white',
+                      }}
+                    />
+                  }
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return (
+                        <span style={{ color: 'gray', fontSize: '1.2rem' }}>
+                          Select countries
+                        </span>
+                      );
+                    }
+                    return (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.1 }}>
+                        {selected.map((value) => (
+                          <Chip
+                            key={value}
+                            label={
+                              countries.find((country) => country.id === value)
+                                ?.name || value
+                            }
+                          />
+                        ))}
+                      </Box>
+                    );
+                  }}
+                  MenuProps={MenuProps}
+                >
+                  {countries.map((country) => (
+                    <MenuItem key={country.id} value={country.id}>
+                      {country.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </label>
+
             <input
               type="text"
               name="meetingBefore"

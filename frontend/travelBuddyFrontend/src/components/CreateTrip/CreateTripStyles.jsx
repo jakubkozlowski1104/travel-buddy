@@ -21,11 +21,10 @@ export const StyledCreateTripContainer = styled.div`
 
     .banner {
       font-size: 2.3rem;
-      margin-bottom: 20px;
     }
 
     .forms {
-      margin-top: 20px;
+      margin-top: 0px;
       padding: 10px;
       display: flex;
       flex-direction: column;
@@ -89,6 +88,7 @@ export const StyledCreateTripContainer = styled.div`
 
         .countries {
           grid-column: span 2;
+          background-color: red;
         }
 
         .language {
@@ -101,14 +101,17 @@ export const StyledCreateTripContainer = styled.div`
 
         .description {
           grid-column: span 3;
+          height: 100px;
         }
 
         .wantToSee {
           grid-column: span 3;
+          height: 100px;
         }
 
         .wantToDo {
           grid-column: span 3;
+          height: 100px;
         }
 
         input,
