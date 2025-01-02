@@ -63,6 +63,25 @@ const CreateTrip = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    // Walidacja dat
+    if (name === 'startDate') {
+      // Start date nie może być wcześniejsze niż dzisiaj
+      const today = new Date().toISOString().split('T')[0];
+      if (value < today) {
+        alert('Start date cannot be earlier than today.');
+        return;
+      }
+    }
+
+    if (name === 'endDate') {
+      // End date nie może być wcześniejsze niż start date
+      if (formData.startDate && value < formData.startDate) {
+        alert('End date cannot be earlier than start date.');
+        return;
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: value,
@@ -221,6 +240,7 @@ const CreateTrip = () => {
               className="startDate"
               value={formData.startDate}
               onChange={handleInputChange}
+              min={new Date().toISOString().split('T')[0]}
             />
             <input
               type="date"
@@ -228,6 +248,8 @@ const CreateTrip = () => {
               className="endDate"
               value={formData.endDate}
               onChange={handleInputChange}
+              disabled={!formData.startDate}
+              min={formData.startDate || ''}
             />
 
             <input
