@@ -7,9 +7,11 @@ export const StyledMenu = styled.div`
   padding: 0 20px;
   flex: 5;
   font-family: 'Lato', sans-serif;
+  text-decoration: none;
 
   li.active {
     color: #48f3ff;
+    text-decoration: none;
   }
 
   li:hover {
@@ -28,5 +30,16 @@ export const StyledMenu = styled.div`
     padding: 10px 5px;
     white-space: nowrap;
     ${({ isMainPage }) => !isMainPage && 'display: none;'}
+    color: white;
+  }
+
+  .link {
+    color: white;
+    text-decoration: none;
+  }
+
+  .link.active {
+    color: #48f3ff;
+    text-decoration: none;
   }
 `;

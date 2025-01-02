@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom'; // Import NavLink
 import { useTranslation } from 'react-i18next';
 import { StyledMenu } from './MenuStyled';
 
@@ -14,13 +15,15 @@ const Menu = ({ isMainPage }) => {
   ];
 
   const handleClickLi = (item) => {
-    setActiveItem(item);
-    const section = document.getElementById(item);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
-        behavior: 'smooth',
-      });
+    if (item !== 'add') {
+      setActiveItem(item);
+      const section = document.getElementById(item);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
@@ -30,9 +33,21 @@ const Menu = ({ isMainPage }) => {
         <li
           key={item.name}
           className={activeItem === item.name ? 'active' : ''}
-          onClick={() => handleClickLi(item.name)}
+          onClick={
+            item.name !== 'add' ? () => handleClickLi(item.name) : undefined
+          }
         >
-          {item.label}
+          {item.name === 'add' ? (
+            <NavLink
+              to="/create-trip"
+              className="link"
+              onClick={() => setActiveItem(item.name)}
+            >
+              {item.label}
+            </NavLink>
+          ) : (
+            item.label
+          )}
         </li>
       ))}
     </StyledMenu>
